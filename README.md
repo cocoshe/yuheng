@@ -1,2 +1,2 @@
 # backend
-go-mvc based on gin && gorm
+go-mvc based on gin && gorm (unfinished)
