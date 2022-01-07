@@ -1,2 +1,1 @@
-# backend
-go-mvc based on gin && gorm (unfinished)
+# yuheng
