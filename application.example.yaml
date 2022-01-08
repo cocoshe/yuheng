@@ -13,3 +13,7 @@ db:
   DB_MAX_IDLE_CONNS:
   DB_MAX_LIFETIME_CONNS:
 
+basic:
+  jwt:
+    secret:
+
