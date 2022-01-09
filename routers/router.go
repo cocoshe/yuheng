@@ -6,6 +6,6 @@ import (
 )
 
 func RegisterRoutes(r *gin.Engine) {
-	r.GET("/", handlers.IndexHandler)
+	r.GET("/index", handlers.IndexHandler)
 	r.GET("/ping", handlers.PingHandler)
 }
