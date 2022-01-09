@@ -18,7 +18,7 @@ func init() {
 		config.GlobalConfig.GetString("db.Pass"),
 		config.GlobalConfig.GetString("db.Addr"),
 		config.GlobalConfig.GetString("db.Port"),
-		config.GlobalConfig.GetString("db.test_db"),
+		config.GlobalConfig.GetString("db.DB"),
 	)
 
 	// connect and open db connection
@@ -27,6 +27,7 @@ func init() {
 	if err != nil {
 		log.Fatal("Mysql connect fail!")
 	}
+	MysqlDb.SingularTable(true)
 
 	// max open connections
 	dbMaxOpenConns := config.GlobalConfig.GetInt("DB_MAX_OPEN_CONNS")
