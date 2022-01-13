@@ -36,7 +36,9 @@ func FindUserById(id string, user *models.User) error {
 	if id == "" {
 		return errors.New("id is empty, find failed!")
 	}
-	drivers.MysqlDb.Where("id = ?", id).First(&user)
+	if user != nil {
+		drivers.MysqlDb.Where("id = ?", id).First(&user)
+	}
 	return nil
 }
 
