@@ -2,6 +2,7 @@ package drivers
 
 import (
 	"backend/config"
+	"backend/models"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
@@ -46,4 +47,11 @@ func init() {
 	if MysqlDbErr := MysqlDb.DB().Ping(); nil != MysqlDbErr {
 		panic("database connect failed: " + MysqlDbErr.Error())
 	}
+
+	MysqlDb.AutoMigrate(
+		&models.User{},
+		&models.Accusation{},
+		&models.Appeal{},
+	)
+
 }
