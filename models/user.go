@@ -6,6 +6,7 @@ type User struct {
 	Name   string `json:"name" gorm:"name"`               // 昵称/姓名
 	Level  int    `json:"level" gorm:"level"`             // 权限
 	Reward int    `json:"reward" gorm:"reward"`           //积分
+	status int    `json:"status" gorm:"status"`
 }
 
 /*
