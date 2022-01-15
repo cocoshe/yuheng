@@ -2,7 +2,11 @@ package utils
 
 import (
 	"backend/models"
+	"fmt"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/gin-gonic/gin"
+	"net/http"
+	"strings"
 	"time"
 )
 
@@ -44,4 +48,36 @@ func ParseToken(tokenString string) (*jwt.Token, *Claims, error) {
 	})
 
 	return token, claims, err
+}
+
+func MiddlewareFunc(c *gin.Context) *Claims {
+	// 获取 authorization header
+	tokenString := c.GetHeader("Authorization")
+
+	fmt.Print("请求token: ", tokenString)
+
+	//validate token formate
+	if tokenString == "" || !strings.HasPrefix(tokenString, "Bearer ") {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"code": 401,
+			"msg":  "request token error",
+		})
+		c.Abort()
+		return nil
+	}
+
+	tokenString = tokenString[7:] //截取字符
+
+	token, claims, err := ParseToken(tokenString)
+
+	if err != nil || !token.Valid {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"code": 401,
+			"msg":  "token valid",
+		})
+		c.Abort()
+		return nil
+	}
+
+	return claims
 }
