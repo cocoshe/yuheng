@@ -12,6 +12,10 @@ import (
 func GvmtMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		claims := utils.MiddlewareFunc(c)
+		if claims == nil {
+			c.Abort()
+			return
+		}
 		//token通过验证, 获取claims中的UserID
 		userId := claims.UserId
 		var user models.User

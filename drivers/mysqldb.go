@@ -26,6 +26,7 @@ func init() {
 	var err error
 	MysqlDb, err = gorm.Open("mysql", dbDSN)
 	if err != nil {
+		log.Print(err)
 		log.Fatal("Mysql connect fail!")
 	}
 	MysqlDb.SingularTable(true)
@@ -52,6 +53,7 @@ func init() {
 		&models.User{},
 		&models.Accusation{},
 		&models.Appeal{},
+		&models.Company{},
 	)
 
 }

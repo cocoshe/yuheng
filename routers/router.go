@@ -10,6 +10,12 @@ import (
 )
 
 func RegisterRoutes(r *gin.Engine) {
+
+	r.POST("/display", handlers.DisplayHandler)
+	r.POST("/displayBad", handlers.DisplayBadHandler)
+	r.POST("/changeStatus", middleware.GvmtMiddleware(), gvmt.ChangeStatus_v2)
+	r.POST("/insight", handlers.InsightHandler)
+
 	r.GET("/index", handlers.IndexHandler)
 	r.GET("/ping", handlers.PingHandler)
 	r.POST("/login", handlers.LoginHandler)
