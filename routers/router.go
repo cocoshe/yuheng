@@ -13,20 +13,20 @@ func RegisterRoutes(r *gin.Engine) {
 
 	r.POST("/display", handlers.DisplayHandler)
 	r.POST("/displayBad", handlers.DisplayBadHandler)
-	r.POST("/changeStatus", middleware.GvmtMiddleware(), gvmt.ChangeStatus_v2)
 	r.POST("/insight", handlers.InsightHandler)
+	r.POST("/addAtten", handlers.AddAttenHandler)
+	r.POST("/delAtten", handlers.DelAttenHandler)
+	r.GET("/attenInfo", handlers.AttenInfoHandler)
 
 	r.GET("/index", handlers.IndexHandler)
 	r.GET("/ping", handlers.PingHandler)
 	r.POST("/login", handlers.LoginHandler)
-	r.GET("/info", middleware.GvmtMiddleware(), handlers.Info)
-	r.POST("/test", handlers.TestHandler)
 	gvmtGroup := r.Group("/gvmt").Use(middleware.GvmtMiddleware())
 	{
-		// 审核算法输出视图
-		gvmtGroup.GET("/getWarningList", gvmt.GetWarningList)
-		gvmtGroup.GET("/appeal", gvmt.Appeal)
+		gvmtGroup.GET("/getAppealList", gvmt.GetAppealList)
 		gvmtGroup.POST("/changeStatus", gvmt.ChangeStatus)
+		gvmtGroup.POST("/changeAccusStatus", gvmt.ChangeAccusStatus)
+		gvmtGroup.POST("/changeAplStatus", gvmt.ChangeAplStatus)
 
 		// 查看群众上传的举报视图
 		gvmtGroup.GET("/getAccusationList", gvmt.GetAccusationList)
@@ -42,6 +42,7 @@ func RegisterRoutes(r *gin.Engine) {
 	{
 		// 公司申诉
 		companyGroup.POST("/appeal", company.Appeal)
+		companyGroup.GET("/history", company.History)
 	}
 
 }

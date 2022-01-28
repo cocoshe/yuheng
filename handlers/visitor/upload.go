@@ -2,9 +2,9 @@ package visitor
 
 import (
 	"backend/drivers"
+	"backend/middleware"
 	"backend/models"
 	"backend/utils"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"log"
@@ -14,40 +14,37 @@ import (
 
 // TODO: 游客上传举报信息(wait for test)
 func Upload(c *gin.Context) {
-	file, err := c.FormFile("photo")
-	if err != nil {
-		log.Print(err)
-	}
-
-	tokenString := c.GetHeader("Authorization")
-	tokenString = tokenString[7:]
-	_, claims, err := utils.ParseToken(tokenString)
-	if err != nil {
-		log.Print(err)
+	claim := utils.MiddlewareFunc(c)
+	if claim == nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"code": 401,
+			"msg":  "token invalid",
+		})
 		return
 	}
 
-	userId := claims.UserId
-
-	nowTime := time.Now().Unix()
-
-	filePath := fmt.Sprintf("static/visitor/%s_%s", userId, nowTime)
-	err = utils.SaveUploadedFile(file, filePath)
+	var userPostDto models.UserPostDto
+	err := c.BindJSON(&userPostDto)
 	if err != nil {
-		log.Print(err)
+		log.Println(err)
+		return
 	}
 
-	// 更新db
-	var accus models.Appeal
-	accus.Pic = filePath
-	accus.Post = c.PostForm("post")
-	accus.Id = uuid.New()
-	accus.UserId = userId
-	accus.Time = time.Now()
-	drivers.MysqlDb.Table("accusation").Create(&accus)
+	accus := &models.Accusation{
+		Id:        uuid.New(),
+		CompanyId: userPostDto.Id,
+		UserId:    claim.UserId,
+		Time:      time.Now(),
+		Post:      userPostDto.Post,
+		Pic:       userPostDto.Pic,
+		Status:    middleware.WAITING,
+	}
+
+	drivers.MysqlDb.Table("accusation").Create(accus)
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
-		"msg":  "success to create accusation",
+		"msg":  "success",
 	})
+
 }

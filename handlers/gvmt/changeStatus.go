@@ -10,18 +10,6 @@ import (
 
 // TODO: 政府修改可疑企业状态(wait for test)
 func ChangeStatus(c *gin.Context) {
-	var apl models.Appeal
-	c.ShouldBind(&apl)
-
-	var db_apl models.Appeal
-	drivers.MysqlDb.First(&db_apl)
-
-	db_apl.Status = apl.Status
-	drivers.MysqlDb.Save(&db_apl)
-
-}
-
-func ChangeStatus_v2(c *gin.Context) {
 	var company models.Company
 	err := c.BindJSON(&company)
 	if err != nil {
