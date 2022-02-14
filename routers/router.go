@@ -17,6 +17,7 @@ func RegisterRoutes(r *gin.Engine) {
 	r.POST("/addAtten", handlers.AddAttenHandler)
 	r.POST("/delAtten", handlers.DelAttenHandler)
 	r.GET("/attenInfo", handlers.AttenInfoHandler)
+	//r.GET("/run", handlers.RunHandler) // export GOROOT=/d/sdk/go1.17.2
 
 	r.GET("/index", handlers.IndexHandler)
 	r.GET("/ping", handlers.PingHandler)
