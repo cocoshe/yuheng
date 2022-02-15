@@ -12,6 +12,15 @@ import (
 	"time"
 )
 
+// @Summary      进行举报
+// @Description  进行举报
+// @Tags         visitor
+// @Accept       json
+// @Produce      json
+// @Param         object body models.UserPostDto true "举报信息"
+// @Success 200 object models.SuccessResponse
+// @Failure 401 object models.FailureResponse
+//@Router       /visitor/upload [post]
 // TODO: 游客上传举报信息(wait for test)
 func Upload(c *gin.Context) {
 	claim := utils.MiddlewareFunc(c)

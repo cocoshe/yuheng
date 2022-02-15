@@ -1,0 +1,519 @@
+definitions:
+  models.AccusStatusDto:
+    properties:
+      id:
+        example: 9cade01e-4c66-4c57-910a-2efe5f7e3dff
+        type: string
+      status:
+        example: 1
+        type: integer
+    type: object
+  models.Accusation:
+    properties:
+      company_id:
+        example: "17280000089799"
+        type: string
+      id:
+        description: 文章uuid
+        example: a05cde18-488b-4dc4-afa1-df9e0ccf16a1
+        type: string
+      pic:
+        description: 帖子图片路径
+        example: 图片内容
+        type: string
+      post:
+        description: 帖子内容
+        example: 文字内容
+        type: string
+      status:
+        description: 举报状态
+        example: 2
+        type: integer
+      time:
+        description: 时间
+        example: "2022-01-28T23:57:30+08:00"
+        type: string
+      userId:
+        description: 用户名
+        example: "123123"
+        type: string
+    type: object
+  models.AccusationList:
+    properties:
+      code:
+        example: "200"
+        type: string
+      data:
+        items:
+          $ref: '#/definitions/models.Accusation'
+        type: array
+      msg:
+        example: success
+        type: string
+    type: object
+  models.AplStatusDto:
+    properties:
+      id:
+        example: 967d7ae4-1c39-40f8-befd-222d768d70f7
+        type: string
+      status:
+        example: 1
+        type: integer
+    type: object
+  models.Appeal:
+    properties:
+      company_id:
+        example: "17280000089799"
+        type: string
+      id:
+        description: 文章uuid
+        example: 967d7ae4-1c39-40f8-befd-222d768d70f7
+        type: string
+      pic:
+        description: 帖子图片路径
+        example: 图片内容
+        type: string
+      post:
+        description: 帖子内容
+        example: 文字内容
+        type: string
+      status:
+        description: 举报状态
+        example: 2
+        type: integer
+      time:
+        description: 时间
+        example: "2022-01-28T23:45:54+08:00"
+        type: string
+    type: object
+  models.AppealList:
+    properties:
+      code:
+        example: "200"
+        type: string
+      data:
+        items:
+          $ref: '#/definitions/models.Appeal'
+        type: array
+      msg:
+        example: success
+        type: string
+    type: object
+  models.Company:
+    properties:
+      id:
+        example: "172800010800110000"
+        type: string
+      status:
+        example: 2
+        type: integer
+    type: object
+  models.CompanyAppealDto:
+    properties:
+      id:
+        example: "17280000089799"
+        type: string
+      pic:
+        example: 图片内容
+        type: string
+      post:
+        example: 文字申诉内容
+        type: string
+    type: object
+  models.CpnListResponse:
+    properties:
+      code:
+        example: "200"
+        type: string
+      data:
+        items:
+          $ref: '#/definitions/models.Company'
+        type: array
+      msg:
+        example: success
+        type: string
+    type: object
+  models.DisplayRequest:
+    properties:
+      idx1:
+        example: "1"
+        type: string
+      idx2:
+        example: "3"
+        type: string
+    type: object
+  models.DisplayResponse:
+    properties:
+      code:
+        example: "200"
+        type: string
+      data:
+        items:
+          $ref: '#/definitions/models.Company'
+        type: array
+      msg:
+        example: success
+        type: string
+    type: object
+  models.FailureResponse:
+    properties:
+      code:
+        example: "401"
+        type: string
+      msg:
+        example: token invalid
+        type: string
+    type: object
+  models.JSONid:
+    properties:
+      id:
+        example: "17280000089799"
+        type: string
+    type: object
+  models.LoginRequest:
+    properties:
+      id:
+        description: 账号
+        example: "321321"
+        type: string
+      pwd:
+        description: 密码
+        example: "321"
+        type: string
+    type: object
+  models.LoginResponse:
+    properties:
+      code:
+        example: "200"
+        type: string
+      msg:
+        example: success
+        type: string
+      token:
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3MjgwMDAwMDg5OSIsImlhdCI6MTU4NjQwMjQ5NywiZXhwIjoxNTg2NDAyNzk3fQ.
+        type: string
+    type: object
+  models.SuccessResponse:
+    properties:
+      code:
+        example: "200"
+        type: string
+      msg:
+        example: success
+        type: string
+    type: object
+  models.UserPostDto:
+    properties:
+      id:
+        example: "17280000089799"
+        type: string
+      pic:
+        example: 图片内容
+        type: string
+      post:
+        example: 文字内容
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /addAtten:
+    post:
+      consumes:
+      - application/json
+      description: 添加到关注列表
+      parameters:
+      - description: 公司id
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.JSONid'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.FailureResponse'
+      summary: 添加到关注列表
+  /attenInfo:
+    get:
+      consumes:
+      - application/json
+      description: 获得关注列表的公司id和状态
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CpnListResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.FailureResponse'
+      summary: 获得关注列表的公司id和状态
+  /company/appeal:
+    post:
+      consumes:
+      - application/json
+      description: 公司进行申诉
+      parameters:
+      - description: 公司申诉信息
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.CompanyAppealDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+      summary: 公司进行申诉
+      tags:
+      - company
+  /company/history:
+    get:
+      consumes:
+      - application/json
+      description: 返回所有的企业申诉信息给政府视图
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AppealList'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.FailureResponse'
+      summary: 返回所有的企业申诉信息给政府视图
+      tags:
+      - company
+  /delAtten:
+    post:
+      consumes:
+      - application/json
+      description: 删除关注
+      parameters:
+      - description: 公司id
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.JSONid'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.FailureResponse'
+      summary: 删除关注
+  /displayBad:
+    post:
+      consumes:
+      - application/json
+      description: 展示可疑公司及其状态(传入两个索引)
+      parameters:
+      - description: 传入两个索引
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.DisplayRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DisplayResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.FailureResponse'
+      summary: 展示可疑公司及其状态(传入两个索引)
+  /gvmt/changeAccusStatus:
+    post:
+      consumes:
+      - application/json
+      description: 修改待审核的排污实地图列表状态
+      parameters:
+      - description: status=1表示不通过,status=2表示等待,status=3表示通过
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.AccusStatusDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+      summary: 修改待审核的排污实地图列表状态
+      tags:
+      - gvmt(admin)
+  /gvmt/changeAplStatus:
+    post:
+      consumes:
+      - application/json
+      description: 修改申诉列表状态
+      parameters:
+      - description: status=1表示不通过,status=2表示等待,status=3表示通过
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.AplStatusDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+      summary: 修改申诉列表状态
+      tags:
+      - gvmt(admin)
+  /gvmt/changeStatus:
+    post:
+      consumes:
+      - application/json
+      description: 政府修改企业状态
+      parameters:
+      - description: 修改公司状态为status, 1为正常, 2为可疑违规
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.Company'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+      summary: 政府修改企业状态
+      tags:
+      - gvmt(admin)
+  /gvmt/getAccusationList:
+    get:
+      consumes:
+      - application/json
+      description: 返回所有游客投诉信息列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AccusationList'
+      summary: 返回所有游客投诉信息列表
+      tags:
+      - gvmt(admin)
+  /gvmt/getAppealList:
+    get:
+      consumes:
+      - application/json
+      description: 返回所有的企业申诉信息给政府视图
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AppealList'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.FailureResponse'
+      summary: 返回所有的企业申诉信息给政府视图
+      tags:
+      - gvmt(admin)
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: 登录
+      parameters:
+      - description: 登录信息
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.LoginResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.FailureResponse'
+      summary: 登录
+  /visitor/history:
+    get:
+      consumes:
+      - application/json
+      description: 返回所有的企业申诉信息给政府视图
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.AccusationList'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.FailureResponse'
+      summary: 返回所有的企业申诉信息给政府视图
+      tags:
+      - visitor
+  /visitor/upload:
+    post:
+      consumes:
+      - application/json
+      description: 进行举报
+      parameters:
+      - description: 举报信息
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserPostDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.FailureResponse'
+      summary: 进行举报
+      tags:
+      - visitor
+swagger: "2.0"

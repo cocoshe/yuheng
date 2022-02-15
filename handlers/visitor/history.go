@@ -9,7 +9,14 @@ import (
 	"net/http"
 )
 
-// TODO: 展示提交的历史记录试图  (查一遍表格,看有没有userId一样的accusation)(wait for test)
+// @Summary      返回所有的企业申诉信息给政府视图
+// @Description  返回所有的企业申诉信息给政府视图
+// @Tags         visitor
+// @Accept       json
+// @Produce      json
+// @Success 200 object models.AccusationList
+// @Failure 401 object models.FailureResponse
+//@Router       /visitor/history [get]
 func History(c *gin.Context) {
 	var accus []models.Accusation
 	//var user models.User
@@ -32,7 +39,7 @@ func History(c *gin.Context) {
 		"code": 200,
 		"data": accus,
 		//"reward": user.Reward,
-		//"msg":    "get all history for visitor",
+		"msg": "success",
 	})
 
 }

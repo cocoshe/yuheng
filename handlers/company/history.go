@@ -8,6 +8,14 @@ import (
 	"net/http"
 )
 
+// @Summary      返回所有的企业申诉信息给政府视图
+// @Description  返回所有的企业申诉信息给政府视图
+// @Tags         company
+// @Accept       json
+// @Produce      json
+// @Success 200 object models.AppealList
+// @Failure 401 object models.FailureResponse
+//@Router       /company/history [get]
 func History(c *gin.Context) {
 	claim := utils.MiddlewareFunc(c)
 	if claim == nil {

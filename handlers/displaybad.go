@@ -24,11 +24,11 @@ func DisplayBadHandler(c *gin.Context) {
 	idx1 := company.Idx1
 	idx2 := company.Idx2
 	if idx1 == "" || idx2 == "" {
-		drivers.MysqlDb.Table("company").Where("status = 1").Find(&company_infos)
+		drivers.MysqlDb.Table("company").Where("status = 2").Find(&company_infos)
 	} else {
 		num1, _ := strconv.Atoi(idx1)
 		num2, _ := strconv.Atoi(idx2)
-		drivers.MysqlDb.Table("company").Where("status = 1").Offset(num1 - 1).Limit(num2 - num1 + 1).Find(&company_infos)
+		drivers.MysqlDb.Table("company").Where("status = 2").Offset(num1 - 1).Limit(num2 - num1 + 1).Find(&company_infos)
 	}
 
 	c.JSON(http.StatusOK, gin.H{

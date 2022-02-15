@@ -8,6 +8,14 @@ import (
 	"net/http"
 )
 
+// @Summary      修改待审核的排污实地图列表状态
+// @Description  修改待审核的排污实地图列表状态
+// @Tags         gvmt(admin)
+// @Accept       json
+// @Produce      json
+// @Param         object body models.AccusStatusDto true "status=1表示不通过,status=2表示等待,status=3表示通过"
+// @Success 200 object models.SuccessResponse
+//@Router       /gvmt/changeAccusStatus [post]
 func ChangeAccusStatus(c *gin.Context) {
 	postDto := &models.AccusStatusDto{}
 	err := c.BindJSON(postDto)

@@ -11,7 +11,14 @@ import (
 	"time"
 )
 
-// TODO: 公司进行申诉(wait for test)
+// @Summary      公司进行申诉
+// @Description  公司进行申诉
+// @Tags         company
+// @Accept       json
+// @Produce      json
+// @Param         object body models.CompanyAppealDto true "公司申诉信息"
+// @Success 200 object models.SuccessResponse
+//@Router       /company/appeal [post]
 func Appeal(c *gin.Context) {
 	var cpnAplDto models.CompanyAppealDto
 	err := c.BindJSON(&cpnAplDto)

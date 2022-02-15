@@ -8,7 +8,14 @@ import (
 	"net/http"
 )
 
-// TODO: 返回所有的企业申诉信息给政府视图(wait for test)
+// @Summary      返回所有的企业申诉信息给政府视图
+// @Description  返回所有的企业申诉信息给政府视图
+// @Tags         gvmt(admin)
+// @Accept       json
+// @Produce      json
+// @Success 200 object models.AppealList
+// @Failure 401 object models.FailureResponse
+//@Router       /gvmt/getAppealList [get]
 func GetAppealList(c *gin.Context) {
 	claim := utils.MiddlewareFunc(c)
 	if claim == nil {

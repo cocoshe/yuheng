@@ -10,6 +10,14 @@ import (
 	"net/http"
 )
 
+// @Summary      登录
+// @Description  登录
+// @Accept       json
+// @Produce      json
+// @Param         object body models.LoginRequest true "登录信息"
+// @Success 200 object models.LoginResponse
+// @Failure 401 object models.FailureResponse
+//@Router       /login [post]
 func LoginHandler(c *gin.Context) {
 	var user models.User
 	err := c.ShouldBind(&user)
@@ -47,9 +55,9 @@ func LoginHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"code": 200,
-		"data": token,
-		"msg":  "login success!",
+		"code":  200,
+		"token": token,
+		"msg":   "success",
 	})
 
 }

@@ -11,6 +11,13 @@ import (
 	"strings"
 )
 
+// @Summary      获得关注列表的公司id和状态
+// @Description  获得关注列表的公司id和状态
+// @Accept       json
+// @Produce      json
+// @Success 200 object models.CpnListResponse
+// @Failure 401 object models.FailureResponse
+//@Router       /attenInfo [get]
 func AttenInfoHandler(c *gin.Context) {
 	claim := utils.MiddlewareFunc(c)
 	if claim == nil {
@@ -42,6 +49,7 @@ func AttenInfoHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,
 		"data": cpnList,
+		"msg":  "success",
 	})
 
 }

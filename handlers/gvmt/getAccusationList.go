@@ -7,7 +7,13 @@ import (
 	"net/http"
 )
 
-// TODO: 返回所有游客投诉信息列表(wait for test)
+// @Summary      返回所有游客投诉信息列表
+// @Description  返回所有游客投诉信息列表
+// @Tags         gvmt(admin)
+// @Accept       json
+// @Produce      json
+// @Success 200 object models.AccusationList
+//@Router       /gvmt/getAccusationList [get]
 func GetAccusationList(c *gin.Context) {
 	var accus []models.Accusation
 	drivers.MysqlDb.Table("accusation").Find(&accus)

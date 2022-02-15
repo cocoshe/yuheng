@@ -11,6 +11,14 @@ import (
 	"net/http"
 )
 
+// @Summary      添加到关注列表
+// @Description  添加到关注列表
+// @Accept       json
+// @Produce      json
+// @Param       object body models.JSONid true "公司id"
+// @Success 200 object models.SuccessResponse
+// @Failure 401 object models.FailureResponse
+//@Router       /addAtten [post]
 func AddAttenHandler(c *gin.Context) {
 	claim := utils.MiddlewareFunc(c)
 	if claim == nil {

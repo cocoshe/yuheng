@@ -1,12 +1,15 @@
 package routers
 
 import (
+	_ "backend/docs"
 	"backend/handlers"
 	"backend/handlers/company"
 	"backend/handlers/gvmt"
 	"backend/handlers/visitor"
 	"backend/middleware"
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func RegisterRoutes(r *gin.Engine) {
@@ -45,5 +48,7 @@ func RegisterRoutes(r *gin.Engine) {
 		companyGroup.POST("/appeal", company.Appeal)
 		companyGroup.GET("/history", company.History)
 	}
+
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 }

@@ -6,20 +6,20 @@ import (
 )
 
 type Accusation struct {
-	Id        uuid.UUID `json:"id" gorm:"primary_key"` //文章uuid
-	CompanyId string    `json:"company_id"`
-	UserId    string    `json:"userId"` //用户名
-	Time      time.Time `json:"time"`   //时间
-	Post      string    `json:"post"`   //帖子内容
-	Pic       string    `json:"pic"`    //帖子图片路径
-	Status    int       `json:"status"` //举报状态
+	Id        uuid.UUID `json:"id" gorm:"primary_key" example:"a05cde18-488b-4dc4-afa1-df9e0ccf16a1"` //文章uuid
+	CompanyId string    `json:"company_id" example:"17280000089799"`
+	UserId    string    `json:"userId" example:"123123"`                  //用户名
+	Time      time.Time `json:"time" example:"2022-01-28T23:57:30+08:00"` //时间
+	Post      string    `json:"post" example:"文字内容"`                      //帖子内容
+	Pic       string    `json:"pic" example:"图片内容"`                       //帖子图片路径
+	Status    int       `json:"status" example:"2"`                       //举报状态
 }
 
 type Appeal struct {
-	Id        uuid.UUID `json:"id" gorm:"primary_key"` //文章uuid
-	CompanyId string    `json:"company_id"`
-	Time      time.Time `json:"time"`   //时间
-	Post      string    `json:"post"`   //帖子内容
-	Pic       string    `json:"pic"`    //帖子图片路径
-	Status    int       `json:"status"` //举报状态
+	Id        uuid.UUID `json:"id" gorm:"primary_key" example:"967d7ae4-1c39-40f8-befd-222d768d70f7"` //文章uuid
+	CompanyId string    `json:"company_id" example:"17280000089799"`
+	Time      time.Time `json:"time" example:"2022-01-28T23:45:54+08:00"` //时间
+	Post      string    `json:"post" example:"文字内容"`                      //帖子内容
+	Pic       string    `json:"pic" example:"图片内容"`                       //帖子图片路径
+	Status    int       `json:"status" example:"2"`                       //举报状态
 }

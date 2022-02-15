@@ -8,7 +8,14 @@ import (
 	"net/http"
 )
 
-// TODO: 政府修改可疑企业状态(wait for test)
+// @Summary      政府修改企业状态
+// @Description  政府修改企业状态
+// @Tags         gvmt(admin)
+// @Accept       json
+// @Produce      json
+// @Param         object body models.Company true "修改公司状态为status, 1为正常, 2为可疑违规"
+// @Success 200 object models.SuccessResponse
+//@Router       /gvmt/changeStatus [post]
 func ChangeStatus(c *gin.Context) {
 	var company models.Company
 	err := c.BindJSON(&company)
