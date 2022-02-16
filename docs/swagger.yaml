@@ -193,6 +193,45 @@ definitions:
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3MjgwMDAwMDg5OSIsImlhdCI6MTU4NjQwMjQ5NywiZXhwIjoxNTg2NDAyNzk3fQ.
         type: string
     type: object
+  models.RunModelRequest:
+    properties:
+      company_id:
+        description: 公司ID
+        example: "17280000089583"
+        type: string
+      data_e:
+        description: 日/月/年
+        example: 1/2/2020
+        type: string
+      data_s:
+        description: 日/月/年
+        example: 1/1/2020
+        type: string
+      dim:
+        description: 污染物浓度/排污量
+        example: concentration
+        type: string
+      polution_id:
+        description: 污染物ID
+        example: w00000
+        type: string
+      port_id:
+        description: 污染口ID
+        example: "64000000000600100000"
+        type: string
+    type: object
+  models.RunModelResponse:
+    properties:
+      code:
+        example: "200"
+        type: string
+      data:
+        example: 想要的数据
+        type: string
+      msg:
+        example: success
+        type: string
+    type: object
   models.SuccessResponse:
     properties:
       code:
@@ -471,6 +510,26 @@ paths:
           schema:
             $ref: '#/definitions/models.FailureResponse'
       summary: 登录
+  /run:
+    post:
+      consumes:
+      - application/json
+      description: 运行模型, 得到相关数据和结论
+      parameters:
+      - description: 模型运行请求(现在是一些必选项, 后续可以传入自定义的阈值等要求)
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.RunModelRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 运行结果
+          schema:
+            $ref: '#/definitions/models.RunModelResponse'
+      summary: 运行模型, 得到相关数据和结论
   /visitor/history:
     get:
       consumes:

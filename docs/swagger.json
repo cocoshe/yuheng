@@ -395,6 +395,37 @@
                 }
             }
         },
+        "/run": {
+            "post": {
+                "description": "运行模型, 得到相关数据和结论",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "运行模型, 得到相关数据和结论",
+                "parameters": [
+                    {
+                        "description": "模型运行请求(现在是一些必选项, 后续可以传入自定义的阈值等要求)",
+                        "name": "object",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.RunModelRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "运行结果",
+                        "schema": {
+                            "$ref": "#/definitions/models.RunModelResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/visitor/history": {
             "get": {
                 "description": "返回所有的企业申诉信息给政府视图",
@@ -735,6 +766,58 @@
                 "token": {
                     "type": "string",
                     "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3MjgwMDAwMDg5OSIsImlhdCI6MTU4NjQwMjQ5NywiZXhwIjoxNTg2NDAyNzk3fQ."
+                }
+            }
+        },
+        "models.RunModelRequest": {
+            "type": "object",
+            "properties": {
+                "company_id": {
+                    "description": "公司ID",
+                    "type": "string",
+                    "example": "17280000089583"
+                },
+                "data_e": {
+                    "description": "日/月/年",
+                    "type": "string",
+                    "example": "1/2/2020"
+                },
+                "data_s": {
+                    "description": "日/月/年",
+                    "type": "string",
+                    "example": "1/1/2020"
+                },
+                "dim": {
+                    "description": "污染物浓度/排污量",
+                    "type": "string",
+                    "example": "concentration"
+                },
+                "polution_id": {
+                    "description": "污染物ID",
+                    "type": "string",
+                    "example": "w00000"
+                },
+                "port_id": {
+                    "description": "污染口ID",
+                    "type": "string",
+                    "example": "64000000000600100000"
+                }
+            }
+        },
+        "models.RunModelResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "200"
+                },
+                "data": {
+                    "type": "string",
+                    "example": "想要的数据"
+                },
+                "msg": {
+                    "type": "string",
+                    "example": "success"
                 }
             }
         },

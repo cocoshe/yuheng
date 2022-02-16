@@ -77,3 +77,18 @@ type CpnListResponse struct {
 	Msg  string    `json:"msg" example:"success"`
 	Data []Company `json:"data"`
 }
+
+type RunModelRequest struct {
+	PortId     string `json:"port_id" example:"64000000000600100000"` // 污染口ID
+	PolutionId string `json:"polution_id" example:"w00000"`           // 污染物ID
+	CompanyId  string `json:"company_id" example:"17280000089583"`    // 公司ID
+	Dim        string `json:"dim" example:"concentration"`            // 污染物浓度/排污量
+	DataS      string `json:"data_s" example:"1/1/2020"`              // 日/月/年
+	DataE      string `json:"data_e" example:"1/2/2020"`              // 日/月/年
+}
+
+type RunModelResponse struct {
+	Code string `json:"code" example:"200"`
+	Msg  string `json:"msg" example:"success"`
+	Data string `json:"data" example:"想要的数据"`
+}
