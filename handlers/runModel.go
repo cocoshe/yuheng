@@ -16,7 +16,9 @@ import (
 // @Router       /run [post]
 func RunHandler(c *gin.Context) {
 	ip := config.GlobalConfig.GetString("db.ip")
-	c.Redirect(http.StatusMovedPermanently, fmt.Sprintf("http://%s:5050/run", ip))
+	r := fmt.Sprintf("http://%s:5000/run", ip)
+	//log.Println("redirect: ", r)
+	c.Redirect(http.StatusPermanentRedirect, r)
 	//c.Redirect(http.StatusMovedPermanently, "http://127.0.0.1:5000/run")
 
 }

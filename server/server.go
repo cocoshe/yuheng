@@ -2,6 +2,7 @@ package server
 
 import (
 	"backend/config"
+	"backend/middleware"
 	"backend/routers"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -10,6 +11,7 @@ import (
 func Run(httpServer *gin.Engine) {
 	//服务配置
 	httpServer = gin.Default()
+	httpServer.Use(middleware.Cors())
 
 	httpServer.LoadHTMLGlob(config.GlobalConfig.GetString("httpEngine.templates"))
 	//注册路由
