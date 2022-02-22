@@ -78,17 +78,45 @@ type CpnListResponse struct {
 	Data []Company `json:"data"`
 }
 
+// todo: 完成另一个时间段的采取, 跑两个维度的数据
 type RunModelRequest struct {
 	PortId     string `json:"port_id" example:"64000000000600100000"` // 污染口ID
 	PolutionId string `json:"polution_id" example:"w00000"`           // 污染物ID
 	CompanyId  string `json:"company_id" example:"17280000089583"`    // 公司ID
-	Dim        string `json:"dim" example:"concentration"`            // 污染物浓度/排污量
-	DataS      string `json:"data_s" example:"1/1/2020"`              // 日/月/年
-	DataE      string `json:"data_e" example:"1/2/2020"`              // 日/月/年
+	//Dim        string `json:"dim" example:"concentration"`            // 污染物浓度/排污量
+	DataS1    string `json:"data_s_1" example:"1/1/2020"` // 日/月/年,当前开始时间
+	DataE1    string `json:"data_e_1" example:"1/2/2020"` // 日/月/年,当前结束时间
+	DataS2    string `json:"data_s_2" example:"1/3/2020"` // 日/月/年,对照数据开始时间
+	DataE2    string `json:"data_e_2" example:"1/4/2020"` // 日/月/年,对照数据结束时间
+	Threshold string `json:"threshold" example:"100"`     // 阈值
 }
 
 type RunModelResponse struct {
-	Code string `json:"code" example:"200"`
-	Msg  string `json:"msg" example:"success"`
-	Data string `json:"data" example:"想要的数据"`
+	Code string           `json:"code" example:"200"`
+	Msg  string           `json:"msg" example:"success"`
+	Data RunModelRespData `json:"data"`
+}
+
+// TODO: 跑完模型后, 返回数据
+type RunModelRespData struct {
+	// 总览
+	DangerNum       int `json:"danger_num" example:"1"`         // 疑似违规天数
+	CompareOtherNum int `json:"compare_other_num" example:"+1"` // 对照其他公司天数
+
+	// 具体污染物
+	AverageConcentration   float64 `json:"average_concentration" example:"0.2"`      // 平均浓度
+	CompareThreshold       float64 `json:"compare_threshold" example:"-0.2"`         // 较阈值
+	CompareOtherChange     float64 `json:"compare_other_change" example:"0.2"`       // 相对对照数据的变化
+	CompareOtherChangeRate float64 `json:"compare_other_change_rate" example:"+0.2"` // 相对对照数据的变化率
+	AverageAmount          float64 `json:"average_amount" example:"100"`             // 平均量
+	DangerPolutionNum      int     `json:"danger_polution_num" example:"1"`          // 对该污染物的疑似违规天数
+
+	// 可视化
+	ComparedDataAverageConcentration float64 `json:"compared_data_average_concentration" example:"2.5"` // 如 上周平均浓度
+	ComparedDataAverageAmount        float64 `json:"compared_data_average_amount" example:"100"`        // 如 上周平均量
+	// 来源排污口(对应一个排污口)
+	PortId            string   `json:"port_id" example:"64000000000600100000"`    // 污染口ID
+	PortAmount        float64  `json:"port_amount" example:"1000"`                // 该排污口排污量
+	PortConcentration float64  `json:"port_concentration" example:"3.5"`          // 平均排污浓度
+	PortRelativeCpn   []string `json:"port_relative_cpn" example:"123, 456, 789"` // 其他共用企业id
 }

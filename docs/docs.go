@@ -886,20 +886,25 @@ const docTemplate_swagger = `{
                     "type": "string",
                     "example": "17280000089583"
                 },
-                "data_e": {
-                    "description": "日/月/年",
+                "data_e_1": {
+                    "description": "日/月/年,当前结束时间",
                     "type": "string",
                     "example": "1/2/2020"
                 },
-                "data_s": {
-                    "description": "日/月/年",
+                "data_e_2": {
+                    "description": "日/月/年,对照数据结束时间",
+                    "type": "string",
+                    "example": "1/4/2020"
+                },
+                "data_s_1": {
+                    "description": "Dim        string ` + "`" + `json:\"dim\" example:\"concentration\"` + "`" + `            // 污染物浓度/排污量",
                     "type": "string",
                     "example": "1/1/2020"
                 },
-                "dim": {
-                    "description": "污染物浓度/排污量",
+                "data_s_2": {
+                    "description": "日/月/年,对照数据开始时间",
                     "type": "string",
-                    "example": "concentration"
+                    "example": "1/3/2020"
                 },
                 "polution_id": {
                     "description": "污染物ID",
@@ -910,6 +915,93 @@ const docTemplate_swagger = `{
                     "description": "污染口ID",
                     "type": "string",
                     "example": "64000000000600100000"
+                },
+                "threshold": {
+                    "description": "阈值",
+                    "type": "string",
+                    "example": "100"
+                }
+            }
+        },
+        "models.RunModelRespData": {
+            "type": "object",
+            "properties": {
+                "average_amount": {
+                    "description": "平均量",
+                    "type": "number",
+                    "example": 100
+                },
+                "average_concentration": {
+                    "description": "具体污染物",
+                    "type": "number",
+                    "example": 0.2
+                },
+                "compare_other_change": {
+                    "description": "相对对照数据的变化",
+                    "type": "number",
+                    "example": 0.2
+                },
+                "compare_other_change_rate": {
+                    "description": "相对对照数据的变化率",
+                    "type": "number",
+                    "example": 0.2
+                },
+                "compare_other_num": {
+                    "description": "对照其他公司天数",
+                    "type": "integer",
+                    "example": 1
+                },
+                "compare_threshold": {
+                    "description": "较阈值",
+                    "type": "number",
+                    "example": -0.2
+                },
+                "compared_data_average_amount": {
+                    "description": "如 上周平均量",
+                    "type": "number",
+                    "example": 100
+                },
+                "compared_data_average_concentration": {
+                    "description": "可视化",
+                    "type": "number",
+                    "example": 2.5
+                },
+                "danger_num": {
+                    "description": "总览",
+                    "type": "integer",
+                    "example": 1
+                },
+                "danger_polution_num": {
+                    "description": "对该污染物的疑似违规天数",
+                    "type": "integer",
+                    "example": 1
+                },
+                "port_amount": {
+                    "description": "该排污口排污量",
+                    "type": "number",
+                    "example": 1000
+                },
+                "port_concentration": {
+                    "description": "平均排污浓度",
+                    "type": "number",
+                    "example": 3.5
+                },
+                "port_id": {
+                    "description": "来源排污口(对应一个排污口)",
+                    "type": "string",
+                    "example": "64000000000600100000"
+                },
+                "port_relative_cpn": {
+                    "description": "其他共用企业id",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "123",
+                        " 456",
+                        " 789"
+                    ]
                 }
             }
         },
@@ -921,8 +1013,7 @@ const docTemplate_swagger = `{
                     "example": "200"
                 },
                 "data": {
-                    "type": "string",
-                    "example": "想要的数据"
+                    "$ref": "#/definitions/models.RunModelRespData"
                 },
                 "msg": {
                     "type": "string",

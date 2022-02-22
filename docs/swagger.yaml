@@ -199,17 +199,22 @@ definitions:
         description: 公司ID
         example: "17280000089583"
         type: string
-      data_e:
-        description: 日/月/年
+      data_e_1:
+        description: 日/月/年,当前结束时间
         example: 1/2/2020
         type: string
-      data_s:
-        description: 日/月/年
+      data_e_2:
+        description: 日/月/年,对照数据结束时间
+        example: 1/4/2020
+        type: string
+      data_s_1:
+        description: Dim        string `json:"dim" example:"concentration"`            //
+          污染物浓度/排污量
         example: 1/1/2020
         type: string
-      dim:
-        description: 污染物浓度/排污量
-        example: concentration
+      data_s_2:
+        description: 日/月/年,对照数据开始时间
+        example: 1/3/2020
         type: string
       polution_id:
         description: 污染物ID
@@ -219,6 +224,74 @@ definitions:
         description: 污染口ID
         example: "64000000000600100000"
         type: string
+      threshold:
+        description: 阈值
+        example: "100"
+        type: string
+    type: object
+  models.RunModelRespData:
+    properties:
+      average_amount:
+        description: 平均量
+        example: 100
+        type: number
+      average_concentration:
+        description: 具体污染物
+        example: 0.2
+        type: number
+      compare_other_change:
+        description: 相对对照数据的变化
+        example: 0.2
+        type: number
+      compare_other_change_rate:
+        description: 相对对照数据的变化率
+        example: 0.2
+        type: number
+      compare_other_num:
+        description: 对照其他公司天数
+        example: 1
+        type: integer
+      compare_threshold:
+        description: 较阈值
+        example: -0.2
+        type: number
+      compared_data_average_amount:
+        description: 如 上周平均量
+        example: 100
+        type: number
+      compared_data_average_concentration:
+        description: 可视化
+        example: 2.5
+        type: number
+      danger_num:
+        description: 总览
+        example: 1
+        type: integer
+      danger_polution_num:
+        description: 对该污染物的疑似违规天数
+        example: 1
+        type: integer
+      port_amount:
+        description: 该排污口排污量
+        example: 1000
+        type: number
+      port_concentration:
+        description: 平均排污浓度
+        example: 3.5
+        type: number
+      port_id:
+        description: 来源排污口(对应一个排污口)
+        example: "64000000000600100000"
+        type: string
+      port_relative_cpn:
+        description: 其他共用企业id
+        example:
+        - "123"
+        - ' 456'
+        - ' 789'
+        items:
+          type: string
+        type: array
     type: object
   models.RunModelResponse:
     properties:
@@ -226,8 +299,7 @@ definitions:
         example: "200"
         type: string
       data:
-        example: 想要的数据
-        type: string
+        $ref: '#/definitions/models.RunModelRespData'
       msg:
         example: success
         type: string
