@@ -15,7 +15,8 @@ import (
 // @Produce      json
 // @Param         object body models.AccusStatusDto true "status=1表示不通过,status=2表示等待,status=3表示通过"
 // @Success 200 object models.SuccessResponse
-//@Router       /gvmt/changeAccusStatus [post]
+// @Router       /gvmt/changeAccusStatus [post]
+// @Security ApiKeyAuth
 func ChangeAccusStatus(c *gin.Context) {
 	postDto := &models.AccusStatusDto{}
 	err := c.BindJSON(postDto)

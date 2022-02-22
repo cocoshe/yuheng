@@ -9,14 +9,14 @@ import (
 	"strconv"
 )
 
-// @Summary      展示可疑公司及其状态(传入两个索引)
-// @Description  展示可疑公司及其状态(传入两个索引)
+// @Summary      展示公司及其状态(传入两个索引)
+// @Description  展示公司及其状态(传入两个索引)
 // @Accept       json
 // @Produce      json
 // @Param         object body models.DisplayRequest true "传入两个索引"
 // @Success 200 object models.DisplayResponse
 // @Failure 401 object models.FailureResponse
-//@Router       /displayBad [post]
+// @Router       /display [post]
 func DisplayHandler(c *gin.Context) {
 
 	var company_infos []models.Company

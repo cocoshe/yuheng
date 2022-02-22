@@ -18,6 +18,11 @@ const docTemplate_swagger = `{
     "paths": {
         "/addAtten": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "添加到关注列表",
                 "consumes": [
                     "application/json"
@@ -55,6 +60,11 @@ const docTemplate_swagger = `{
         },
         "/attenInfo": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "获得关注列表的公司id和状态",
                 "consumes": [
                     "application/json"
@@ -81,6 +91,11 @@ const docTemplate_swagger = `{
         },
         "/company/appeal": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "公司进行申诉",
                 "consumes": [
                     "application/json"
@@ -115,6 +130,11 @@ const docTemplate_swagger = `{
         },
         "/company/history": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "返回所有的企业申诉信息给政府视图",
                 "consumes": [
                     "application/json"
@@ -144,6 +164,11 @@ const docTemplate_swagger = `{
         },
         "/delAtten": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "删除关注",
                 "consumes": [
                     "application/json"
@@ -168,6 +193,43 @@ const docTemplate_swagger = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/models.SuccessResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/models.FailureResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/display": {
+            "post": {
+                "description": "展示公司及其状态(传入两个索引)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "展示公司及其状态(传入两个索引)",
+                "parameters": [
+                    {
+                        "description": "传入两个索引",
+                        "name": "object",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.DisplayRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.DisplayResponse"
                         }
                     },
                     "401": {
@@ -218,6 +280,11 @@ const docTemplate_swagger = `{
         },
         "/gvmt/changeAccusStatus": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "修改待审核的排污实地图列表状态",
                 "consumes": [
                     "application/json"
@@ -252,6 +319,11 @@ const docTemplate_swagger = `{
         },
         "/gvmt/changeAplStatus": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "修改申诉列表状态",
                 "consumes": [
                     "application/json"
@@ -286,6 +358,11 @@ const docTemplate_swagger = `{
         },
         "/gvmt/changeStatus": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "政府修改企业状态",
                 "consumes": [
                     "application/json"
@@ -320,6 +397,11 @@ const docTemplate_swagger = `{
         },
         "/gvmt/getAccusationList": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "返回所有游客投诉信息列表",
                 "consumes": [
                     "application/json"
@@ -343,6 +425,11 @@ const docTemplate_swagger = `{
         },
         "/gvmt/getAppealList": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "返回所有的企业申诉信息给政府视图",
                 "consumes": [
                     "application/json"
@@ -440,6 +527,11 @@ const docTemplate_swagger = `{
         },
         "/visitor/history": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "返回所有的企业申诉信息给政府视图",
                 "consumes": [
                     "application/json"
@@ -469,6 +561,11 @@ const docTemplate_swagger = `{
         },
         "/visitor/upload": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "进行举报",
                 "consumes": [
                     "application/json"
@@ -862,6 +959,13 @@ const docTemplate_swagger = `{
                     "example": "文字内容"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }`

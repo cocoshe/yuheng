@@ -15,7 +15,8 @@ import (
 // @Produce      json
 // @Success 200 object models.AppealList
 // @Failure 401 object models.FailureResponse
-//@Router       /company/history [get]
+// @Router       /company/history [get]
+// @Security ApiKeyAuth
 func History(c *gin.Context) {
 	claim := utils.MiddlewareFunc(c)
 	if claim == nil {

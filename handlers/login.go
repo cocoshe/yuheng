@@ -55,8 +55,9 @@ func LoginHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"code":  200,
-		"token": token,
+		"code": 200,
+		//"token": token,
+		"token": fmt.Sprintf("Bearer %s", token),
 		"msg":   "success",
 	})
 

@@ -17,7 +17,8 @@ import (
 // @Produce      json
 // @Success 200 object models.CpnListResponse
 // @Failure 401 object models.FailureResponse
-//@Router       /attenInfo [get]
+// @Router       /attenInfo [get]
+// @Security ApiKeyAuth
 func AttenInfoHandler(c *gin.Context) {
 	claim := utils.MiddlewareFunc(c)
 	if claim == nil {

@@ -16,7 +16,8 @@ import (
 // @Produce      json
 // @Success 200 object models.AccusationList
 // @Failure 401 object models.FailureResponse
-//@Router       /visitor/history [get]
+// @Router       /visitor/history [get]
+// @Security ApiKeyAuth
 func History(c *gin.Context) {
 	var accus []models.Accusation
 	//var user models.User

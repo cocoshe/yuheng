@@ -9,6 +9,9 @@ import (
 
 var HttpServer *gin.Engine
 
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func main() {
 	// 服务停止时清除数据库链接
 	defer drivers.MysqlDb.Close()

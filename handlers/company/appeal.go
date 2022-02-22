@@ -18,7 +18,8 @@ import (
 // @Produce      json
 // @Param         object body models.CompanyAppealDto true "公司申诉信息"
 // @Success 200 object models.SuccessResponse
-//@Router       /company/appeal [post]
+// @Router       /company/appeal [post]
+// @Security ApiKeyAuth
 func Appeal(c *gin.Context) {
 	var cpnAplDto models.CompanyAppealDto
 	err := c.BindJSON(&cpnAplDto)

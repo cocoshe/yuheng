@@ -15,7 +15,8 @@ import (
 // @Produce      json
 // @Param         object body models.Company true "修改公司状态为status, 1为正常, 2为可疑违规"
 // @Success 200 object models.SuccessResponse
-//@Router       /gvmt/changeStatus [post]
+// @Router       /gvmt/changeStatus [post]
+// @Security ApiKeyAuth
 func ChangeStatus(c *gin.Context) {
 	var company models.Company
 	err := c.BindJSON(&company)

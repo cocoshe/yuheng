@@ -15,7 +15,8 @@ import (
 // @Produce      json
 // @Success 200 object models.AppealList
 // @Failure 401 object models.FailureResponse
-//@Router       /gvmt/getAppealList [get]
+// @Router       /gvmt/getAppealList [get]
+// @Security ApiKeyAuth
 func GetAppealList(c *gin.Context) {
 	claim := utils.MiddlewareFunc(c)
 	if claim == nil {

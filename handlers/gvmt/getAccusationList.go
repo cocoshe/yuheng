@@ -13,7 +13,8 @@ import (
 // @Accept       json
 // @Produce      json
 // @Success 200 object models.AccusationList
-//@Router       /gvmt/getAccusationList [get]
+// @Router       /gvmt/getAccusationList [get]
+// @Security ApiKeyAuth
 func GetAccusationList(c *gin.Context) {
 	var accus []models.Accusation
 	drivers.MysqlDb.Table("accusation").Find(&accus)
