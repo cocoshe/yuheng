@@ -83,12 +83,11 @@ type RunModelRequest struct {
 	PortId     string `json:"port_id" example:"64000000000600100000"` // 污染口ID
 	PolutionId string `json:"polution_id" example:"w00000"`           // 污染物ID
 	CompanyId  string `json:"company_id" example:"17280000089583"`    // 公司ID
-	//Dim        string `json:"dim" example:"concentration"`            // 污染物浓度/排污量
-	DataS1    string `json:"date_s_1" example:"1/1/2020"` // 日/月/年,当前开始时间
-	DataE1    string `json:"date_e_1" example:"1/2/2020"` // 日/月/年,当前结束时间
-	DataS2    string `json:"date_s_2" example:"1/3/2020"` // 日/月/年,对照数据开始时间
-	DataE2    string `json:"date_e_2" example:"1/4/2020"` // 日/月/年,对照数据结束时间
-	Threshold string `json:"threshold" example:"100"`     // 阈值
+	DataS1     string `json:"date_s_1" example:"1/1/2020"`            // 日/月/年,当前开始时间
+	DataE1     string `json:"date_e_1" example:"1/2/2020"`            // 日/月/年,当前结束时间
+	DataS2     string `json:"date_s_2" example:"1/3/2020"`            // 日/月/年,对照数据开始时间
+	DataE2     string `json:"date_e_2" example:"1/4/2020"`            // 日/月/年,对照数据结束时间
+	Threshold  string `json:"threshold" example:"100"`                // 阈值
 }
 
 type RunModelResponse struct {
