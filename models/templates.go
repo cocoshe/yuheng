@@ -80,14 +80,15 @@ type CpnListResponse struct {
 
 // todo: 完成另一个时间段的采取, 跑两个维度的数据
 type RunModelRequest struct {
-	PortId     string `json:"port_id" example:"64000000000600100000"` // 污染口ID
-	PolutionId string `json:"polution_id" example:"w00000"`           // 污染物ID
-	CompanyId  string `json:"company_id" example:"17280000089583"`    // 公司ID
-	DataS1     string `json:"date_s_1" example:"1/1/2020"`            // 日/月/年,当前开始时间
-	DataE1     string `json:"date_e_1" example:"1/2/2020"`            // 日/月/年,当前结束时间
-	DataS2     string `json:"date_s_2" example:"1/3/2020"`            // 日/月/年,对照数据开始时间
-	DataE2     string `json:"date_e_2" example:"1/4/2020"`            // 日/月/年,对照数据结束时间
-	Threshold  string `json:"threshold" example:"100"`                // 阈值
+	PortId                     string `json:"port_id" example:"64000000000600100000"`       // 污染口ID
+	PolutionId                 string `json:"polution_id" example:"w00000  如果为空就跑总览信息"`     // 污染物ID
+	CompanyId                  string `json:"company_id" example:"17280000089583"`          // 公司ID
+	DataS1                     string `json:"date_s_1" example:"1/1/2020"`                  // 日/月/年,当前开始时间
+	DataE1                     string `json:"date_e_1" example:"1/2/2020"`                  // 日/月/年,当前结束时间
+	DataS2                     string `json:"date_s_2" example:"1/3/2020"`                  // 日/月/年,对照数据开始时间
+	DataE2                     string `json:"date_e_2" example:"1/4/2020"`                  // 日/月/年,对照数据结束时间
+	ThresholdConcentrationLoss string `json:"threshold_concentration_loss" example:"200.0"` // 浓度损失阈值
+	ThresholdAmountLoss        string `json:"threshold_amount_loss" example:"2000.0"`       // 排放量损失阈值
 }
 
 type RunModelResponse struct {
@@ -96,26 +97,52 @@ type RunModelResponse struct {
 	Data RunModelRespData `json:"data"`
 }
 
-// TODO: 跑完模型后, 返回数据
 type RunModelRespData struct {
-	// 总览
-	DangerNum       int `json:"danger_num" example:"1"`         // 疑似违规天数
-	CompareOtherNum int `json:"compare_other_num" example:"+1"` // 对照其他公司天数
+	Code     string        `json:"code" example:"200"`
+	Meta     string        `json:"meta" example:"single"` // single为单个污染物模式, all为总览模式
+	Msg      string        `json:"msg" example:"success"`
+	Data     DataModel     `json:"data"`     // 单个污染物视图下的相关数据
+	Overview OverviewModel `json:"overview"` // 总览视图下的相关数据
+}
 
-	// 具体污染物
-	AverageConcentration   float64 `json:"average_concentration" example:"0.2"`      // 平均浓度
-	CompareThreshold       float64 `json:"compare_threshold" example:"-0.2"`         // 较阈值
-	CompareOtherChange     float64 `json:"compare_other_change" example:"0.2"`       // 相对对照数据的变化
-	CompareOtherChangeRate float64 `json:"compare_other_change_rate" example:"+0.2"` // 相对对照数据的变化率
-	AverageAmount          float64 `json:"average_amount" example:"100"`             // 平均量
-	DangerPolutionNum      int     `json:"danger_polution_num" example:"1"`          // 对该污染物的疑似违规天数
+type DataModel struct {
+	AverageAmount                                     float64   `json:"average_amount" example:"2127.598713285988"`                                                           // 平均排污量
+	AverageConcentration                              float64   `json:"average_concentration" example:"52.787238479217876"`                                                   // 平均浓度
+	Data1CompareData2WithAverageAmountLoss            float64   `json:"data1_compare_data2_with_average_amount_loss" example:"51.1888359508704"`                              // 较[上周]排污量增长量
+	Data1CompareData2WithAverageAmountLossRate        float64   `json:"data1_compare_data2_with_average_amount_loss_rate" example:"-0.8009344011185189"`                      // 较[上周]排污量增长率
+	Data1CompareData2WithAverageConcentrationLoss     float64   `json:"data1_compare_data2_with_average_concentration_loss" example:"-13.094681522291124"`                    // 较[上周]浓度增长量
+	Data1CompareData2WithAverageConcentrationLossRate float64   `json:"data1_compare_data2_with_average_concentration_loss_rate" example:"-0.8279401442320188"`               // 较[上周]浓度增长率
+	Date1AmountTestList                               []float64 `json:"date1_amount_test_list" example:"[1853.283905720711,1853.283905720711,314.8520582050088,...]"`         // 模型重构排放量序列
+	Date1AmountTruthList                              []float64 `json:"date1_amount_truth_list" example:"[870.0000334143641,1757.9999680727722,1917.9999588906767,...]"`      // 原始采集排放量数据
+	Date1AmountWarningTags                            []string  `json:"date1_amount_warning_tags" example:"['2020-01-07', '2020-01-08',...]"`                                 // 排放量异常日期列表
+	Date1AmountWarningTagsCount                       int       `json:"date1_amount_warning_tags_count" example:"1"`                                                          // 排放量异常日期数量
+	Date1CompareAmountLossWithThreshold               float64   `json:"date1_compare_amount_loss_with_threshold" example:"-2375.351830534637"`                                // 平均排放量异常指数较阈值
+	Date1CompareConcentrationLossWithThreshold        float64   `json:"date1_compare_concentration_loss_with_threshold" example:"-199.19129530233997"`                        // 平均浓度异常指数较阈值
+	Date1ConcentrationTestList                        []float64 `json:"date1_concentration_test_list" example:"[90.42889326810837, 90.42889326810837,71.88690975308418,...]"` // 模型重构浓度序列
+	Date1ConcentrationTruthList                       []float64 `json:"date1_concentration_truth_list" example:"[66.25000024214387, 73.17999936640263,...]"`                  // 原始采集浓度数据
+	Date1ConcentrationWarningTags                     []string  `json:"date1_concentration_warning_tags" example:"['2020-01-07', '2020-01-08',...]"`                          // 浓度异常日期列表
+	Date1ConcentrationWarningTagsCount                int       `json:"date1_concentration_warning_tags_count" example:"1"`                                                   // 浓度异常日期数量
+	Date2AmountTruthList                              []float64 `json:"date2_amount_truth_list" example:"[870.0000334143641,1757.9999680727722,1917.9999588906767,...]"`      // [上周]原始采集排放量数据
+	Date2AverageAmountTruth                           float64   `json:"date2_average_amount_truth" example:"2127.598713285988"`                                               // [上周]平均排污量
+	Date2AverageConcentrationTruth                    float64   `json:"date2_average_concentration_truth" example:"52.787238479217876"`                                       // [上周]平均浓度
+	Date2ConcentrationTruthList                       []float64 `json:"date2_concentration_truth_list" example:"[66.25000024214387, 73.17999936640263,...]"`                  // [上周]原始采集浓度数据
+	PolutionId                                        string    `json:"polution_id" example:"w00000"`                                                                         // 污染物ID
+	PortAverageAmount                                 float64   `json:"port_average_amount" example:"2127.598713285988"`                                                      // 排放口平均排污量
+	PortTotalConcentration                            float64   `json:"port_total_concentration" example:"61295.512913"`                                                      // 排放口总浓度
+	RelativeCpn                                       []string  `json:"relative_cpn" example:"[123,456,789]"`                                                                 // 排放口关联公司
+}
 
-	// 可视化
-	ComparedDataAverageConcentration float64 `json:"compared_data_average_concentration" example:"2.5"` // 如 上周平均浓度
-	ComparedDataAverageAmount        float64 `json:"compared_data_average_amount" example:"100"`        // 如 上周平均量
-	// 来源排污口(对应一个排污口)
-	PortId            string   `json:"port_id" example:"64000000000600100000"`    // 污染口ID
-	PortAmount        float64  `json:"port_amount" example:"1000"`                // 该排污口排污量
-	PortConcentration float64  `json:"port_concentration" example:"3.5"`          // 平均排污浓度
-	PortRelativeCpn   []string `json:"port_relative_cpn" example:"123, 456, 789"` // 其他共用企业id
+type OverviewModel struct {
+	CompareTotalAmountWarningCount            int     `json:"compare_total_amount_warning_count" example:"1"`                               // 较[上周] 总览排放量异常次数增加
+	CompareTotalAmountWarningCountRate        float64 `json:"compare_total_amount_warning_count_rate" example:"-0.8279401442320188"`        // 较[上周] 总览排放量异常次数增加率, 如果为-1,则表明[上周]排放量没有异常
+	CompareTotalConcentrationWarningCount     int     `json:"compare_total_concentration_warning_count" example:"1"`                        // 较[上周] 总览浓度异常次数增加
+	CompareTotalConcentrationWarningCountRate float64 `json:"compare_total_concentration_warning_count_rate" example:"-0.8279401442320188"` // 较[上周] 总览浓度异常次数增加率, 如果为-1,则表明[上周]浓度没有异常
+	CompareTotalWarningCount                  int     `json:"compare_total_warning_count" example:"1"`                                      // 较[上周] 总览排放量和浓度异常次数增加
+	CompareTotalWarningCountRate              float64 `json:"compare_total_warning_count_rate" example:"-0.8279401442320188"`               // 较[上周] 总览排放量和浓度异常次数增加率
+	Date1TotalAmountWarningCount              int     `json:"date1_total_amount_warning_count" example:"1"`                                 // [本周] 总览排放量异常次数
+	Date1TotalConcentrationWarningCount       int     `json:"date1_total_concentration_warning_count" example:"1"`                          // [本周] 总览浓度异常次数
+	Date1TotalWarningCount                    int     `json:"date1_total_warning_count" example:"1"`                                        // [本周] 总览浓度与排放量异常总次数
+	Date2TotalAmountWarningCount              int     `json:"date2_total_amount_warning_count" example:"1"`                                 // [上周] 总览排放量异常次数
+	Date2TotalConcentrationWarningCount       int     `json:"date2_total_concentration_warning_count" example:"1"`                          // [上周] 总览浓度异常次数
+	Date2TotalWarningCount                    int     `json:"date2_total_warning_count" example:"1"`                                        // [上周] 总览浓度与排放量异常总次数
 }

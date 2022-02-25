@@ -886,22 +886,22 @@ const docTemplate_swagger = `{
                     "type": "string",
                     "example": "17280000089583"
                 },
-                "data_e_1": {
+                "date_e_1": {
                     "description": "日/月/年,当前结束时间",
                     "type": "string",
                     "example": "1/2/2020"
                 },
-                "data_e_2": {
+                "date_e_2": {
                     "description": "日/月/年,对照数据结束时间",
                     "type": "string",
                     "example": "1/4/2020"
                 },
-                "data_s_1": {
-                    "description": "Dim        string ` + "`" + `json:\"dim\" example:\"concentration\"` + "`" + `            // 污染物浓度/排污量",
+                "date_s_1": {
+                    "description": "日/月/年,当前开始时间",
                     "type": "string",
                     "example": "1/1/2020"
                 },
-                "data_s_2": {
+                "date_s_2": {
                     "description": "日/月/年,对照数据开始时间",
                     "type": "string",
                     "example": "1/3/2020"
@@ -932,7 +932,7 @@ const docTemplate_swagger = `{
                     "example": 100
                 },
                 "average_concentration": {
-                    "description": "具体污染物",
+                    "description": "平均浓度",
                     "type": "number",
                     "example": 0.2
                 },
@@ -962,12 +962,12 @@ const docTemplate_swagger = `{
                     "example": 100
                 },
                 "compared_data_average_concentration": {
-                    "description": "可视化",
+                    "description": "如 上周平均浓度",
                     "type": "number",
                     "example": 2.5
                 },
                 "danger_num": {
-                    "description": "总览",
+                    "description": "疑似违规天数",
                     "type": "integer",
                     "example": 1
                 },
@@ -987,7 +987,7 @@ const docTemplate_swagger = `{
                     "example": 3.5
                 },
                 "port_id": {
-                    "description": "来源排污口(对应一个排污口)",
+                    "description": "污染口ID",
                     "type": "string",
                     "example": "64000000000600100000"
                 },
