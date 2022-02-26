@@ -80,15 +80,15 @@ type CpnListResponse struct {
 
 // todo: 完成另一个时间段的采取, 跑两个维度的数据
 type RunModelRequest struct {
-	PortId                     string `json:"port_id" example:"64000000000600100000"`       // 污染口ID
-	PolutionId                 string `json:"polution_id" example:"w00000  如果为空就跑总览信息"`     // 污染物ID
-	CompanyId                  string `json:"company_id" example:"17280000089583"`          // 公司ID
-	DataS1                     string `json:"date_s_1" example:"1/1/2020"`                  // 日/月/年,当前开始时间
-	DataE1                     string `json:"date_e_1" example:"1/2/2020"`                  // 日/月/年,当前结束时间
-	DataS2                     string `json:"date_s_2" example:"1/3/2020"`                  // 日/月/年,对照数据开始时间
-	DataE2                     string `json:"date_e_2" example:"1/4/2020"`                  // 日/月/年,对照数据结束时间
-	ThresholdConcentrationLoss string `json:"threshold_concentration_loss" example:"200.0"` // 浓度损失阈值
-	ThresholdAmountLoss        string `json:"threshold_amount_loss" example:"2000.0"`       // 排放量损失阈值
+	PortId                     string  `json:"port_id" example:"64000000000600100000"`        // 污染口ID
+	PolutionId                 string  `json:"polution_id" example:"w00000"`                  // 污染物ID
+	CompanyId                  string  `json:"company_id" example:"17280000089583"`           // 公司ID
+	DataS1                     string  `json:"date_s_1" example:"1/1/2020"`                   // 日/月/年,当前开始时间
+	DataE1                     string  `json:"date_e_1" example:"1/2/2020"`                   // 日/月/年,当前结束时间
+	DataS2                     string  `json:"date_s_2" example:"1/3/2020"`                   // 日/月/年,对照数据开始时间
+	DataE2                     string  `json:"date_e_2" example:"1/4/2020"`                   // 日/月/年,对照数据结束时间
+	ThresholdConcentrationLoss float64 `json:"threshold_concentration_loss" example:"200.10"` // 浓度损失阈值
+	ThresholdAmountLoss        float64 `json:"threshold_amount_loss" example:"2000.10"`       // 排放量损失阈值
 }
 
 type RunModelResponse struct {

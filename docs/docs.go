@@ -1158,7 +1158,7 @@ const docTemplate_swagger = `{
                 "polution_id": {
                     "description": "污染物ID",
                     "type": "string",
-                    "example": "w00000  如果为空就跑总览信息"
+                    "example": "w00000"
                 },
                 "port_id": {
                     "description": "污染口ID",
@@ -1167,13 +1167,13 @@ const docTemplate_swagger = `{
                 },
                 "threshold_amount_loss": {
                     "description": "排放量损失阈值",
-                    "type": "string",
-                    "example": "2000.0"
+                    "type": "number",
+                    "example": 2000.1
                 },
                 "threshold_concentration_loss": {
                     "description": "浓度损失阈值",
-                    "type": "string",
-                    "example": "200.0"
+                    "type": "number",
+                    "example": 200.1
                 }
             }
         },

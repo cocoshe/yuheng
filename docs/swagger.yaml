@@ -408,7 +408,7 @@ definitions:
         type: string
       polution_id:
         description: 污染物ID
-        example: w00000  如果为空就跑总览信息
+        example: w00000
         type: string
       port_id:
         description: 污染口ID
@@ -416,12 +416,12 @@ definitions:
         type: string
       threshold_amount_loss:
         description: 排放量损失阈值
-        example: "2000.0"
-        type: string
+        example: 2000.1
+        type: number
       threshold_concentration_loss:
         description: 浓度损失阈值
-        example: "200.0"
-        type: string
+        example: 200.1
+        type: number
     type: object
   models.RunModelRespData:
     properties:
