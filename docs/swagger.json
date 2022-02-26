@@ -780,6 +780,190 @@
                 }
             }
         },
+        "models.DataModel": {
+            "type": "object",
+            "properties": {
+                "average_amount": {
+                    "description": "平均排污量",
+                    "type": "number",
+                    "example": 2127.598713285988
+                },
+                "average_concentration": {
+                    "description": "平均浓度",
+                    "type": "number",
+                    "example": 52.787238479217876
+                },
+                "data1_compare_data2_with_average_amount_loss": {
+                    "description": "较[上周]排污量增长量",
+                    "type": "number",
+                    "example": 51.1888359508704
+                },
+                "data1_compare_data2_with_average_amount_loss_rate": {
+                    "description": "较[上周]排污量增长率",
+                    "type": "number",
+                    "example": -0.8009344011185189
+                },
+                "data1_compare_data2_with_average_concentration_loss": {
+                    "description": "较[上周]浓度增长量",
+                    "type": "number",
+                    "example": -13.094681522291124
+                },
+                "data1_compare_data2_with_average_concentration_loss_rate": {
+                    "description": "较[上周]浓度增长率",
+                    "type": "number",
+                    "example": -0.8279401442320188
+                },
+                "date1_amount_test_list": {
+                    "description": "模型重构排放量序列",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "example": [
+                        1853.283905720711,
+                        1853.283905720711,
+                        314.8520582050088
+                    ]
+                },
+                "date1_amount_truth_list": {
+                    "description": "原始采集排放量数据",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "example": [
+                        870.0000334143641,
+                        1757.9999680727722,
+                        1917.9999588906767
+                    ]
+                },
+                "date1_amount_warning_tags": {
+                    "description": "排放量异常日期列表",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "2020-01-07'",
+                        " '2020-01-08'"
+                    ]
+                },
+                "date1_amount_warning_tags_count": {
+                    "description": "排放量异常日期数量",
+                    "type": "integer",
+                    "example": 1
+                },
+                "date1_compare_amount_loss_with_threshold": {
+                    "description": "平均排放量异常指数较阈值",
+                    "type": "number",
+                    "example": -2375.351830534637
+                },
+                "date1_compare_concentration_loss_with_threshold": {
+                    "description": "平均浓度异常指数较阈值",
+                    "type": "number",
+                    "example": -199.19129530233997
+                },
+                "date1_concentration_test_list": {
+                    "description": "模型重构浓度序列",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "example": [
+                        90.42889326810837,
+                        90.42889326810837,
+                        71.88690975308418
+                    ]
+                },
+                "date1_concentration_truth_list": {
+                    "description": "原始采集浓度数据",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "example": [
+                        66.25000024214387,
+                        73.17999936640263
+                    ]
+                },
+                "date1_concentration_warning_tags": {
+                    "description": "浓度异常日期列表",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "'2020-01-07'",
+                        " '2020-01-08'"
+                    ]
+                },
+                "date1_concentration_warning_tags_count": {
+                    "description": "浓度异常日期数量",
+                    "type": "integer",
+                    "example": 1
+                },
+                "date2_amount_truth_list": {
+                    "description": "[上周]原始采集排放量数据",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "example": [
+                        870.0000334143641,
+                        1757.9999680727722,
+                        1917.9999588906767
+                    ]
+                },
+                "date2_average_amount_truth": {
+                    "description": "[上周]平均排污量",
+                    "type": "number",
+                    "example": 2127.598713285988
+                },
+                "date2_average_concentration_truth": {
+                    "description": "[上周]平均浓度",
+                    "type": "number",
+                    "example": 52.787238479217876
+                },
+                "date2_concentration_truth_list": {
+                    "description": "[上周]原始采集浓度数据",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "example": [
+                        66.25000024214387,
+                        73.17999936640263
+                    ]
+                },
+                "polution_id": {
+                    "description": "污染物ID",
+                    "type": "string",
+                    "example": "w00000"
+                },
+                "port_average_amount": {
+                    "description": "排放口平均排污量",
+                    "type": "number",
+                    "example": 2127.598713285988
+                },
+                "port_total_concentration": {
+                    "description": "排放口总浓度",
+                    "type": "number",
+                    "example": 61295.512913
+                },
+                "relative_cpn": {
+                    "description": "排放口关联公司",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "123",
+                        "456",
+                        "789"
+                    ]
+                }
+            }
+        },
         "models.DisplayRequest": {
             "type": "object",
             "properties": {
@@ -866,6 +1050,71 @@
                 }
             }
         },
+        "models.OverviewModel": {
+            "type": "object",
+            "properties": {
+                "compare_total_amount_warning_count": {
+                    "description": "较[上周] 总览排放量异常次数增加",
+                    "type": "integer",
+                    "example": 1
+                },
+                "compare_total_amount_warning_count_rate": {
+                    "description": "较[上周] 总览排放量异常次数增加率, 如果为-1,则表明[上周]排放量没有异常",
+                    "type": "number",
+                    "example": -0.8279401442320188
+                },
+                "compare_total_concentration_warning_count": {
+                    "description": "较[上周] 总览浓度异常次数增加",
+                    "type": "integer",
+                    "example": 1
+                },
+                "compare_total_concentration_warning_count_rate": {
+                    "description": "较[上周] 总览浓度异常次数增加率, 如果为-1,则表明[上周]浓度没有异常",
+                    "type": "number",
+                    "example": -0.8279401442320188
+                },
+                "compare_total_warning_count": {
+                    "description": "较[上周] 总览排放量和浓度异常次数增加",
+                    "type": "integer",
+                    "example": 1
+                },
+                "compare_total_warning_count_rate": {
+                    "description": "较[上周] 总览排放量和浓度异常次数增加率",
+                    "type": "number",
+                    "example": -0.8279401442320188
+                },
+                "date1_total_amount_warning_count": {
+                    "description": "[本周] 总览排放量异常次数",
+                    "type": "integer",
+                    "example": 1
+                },
+                "date1_total_concentration_warning_count": {
+                    "description": "[本周] 总览浓度异常次数",
+                    "type": "integer",
+                    "example": 1
+                },
+                "date1_total_warning_count": {
+                    "description": "[本周] 总览浓度与排放量异常总次数",
+                    "type": "integer",
+                    "example": 1
+                },
+                "date2_total_amount_warning_count": {
+                    "description": "[上周] 总览排放量异常次数",
+                    "type": "integer",
+                    "example": 1
+                },
+                "date2_total_concentration_warning_count": {
+                    "description": "[上周] 总览浓度异常次数",
+                    "type": "integer",
+                    "example": 1
+                },
+                "date2_total_warning_count": {
+                    "description": "[上周] 总览浓度与排放量异常总次数",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
         "models.RunModelRequest": {
             "type": "object",
             "properties": {
@@ -897,99 +1146,48 @@
                 "polution_id": {
                     "description": "污染物ID",
                     "type": "string",
-                    "example": "w00000"
+                    "example": "w00000  如果为空就跑总览信息"
                 },
                 "port_id": {
                     "description": "污染口ID",
                     "type": "string",
                     "example": "64000000000600100000"
                 },
-                "threshold": {
-                    "description": "阈值",
+                "threshold_amount_loss": {
+                    "description": "排放量损失阈值",
                     "type": "string",
-                    "example": "100"
+                    "example": "2000.0"
+                },
+                "threshold_concentration_loss": {
+                    "description": "浓度损失阈值",
+                    "type": "string",
+                    "example": "200.0"
                 }
             }
         },
         "models.RunModelRespData": {
             "type": "object",
             "properties": {
-                "average_amount": {
-                    "description": "平均量",
-                    "type": "number",
-                    "example": 100
-                },
-                "average_concentration": {
-                    "description": "平均浓度",
-                    "type": "number",
-                    "example": 0.2
-                },
-                "compare_other_change": {
-                    "description": "相对对照数据的变化",
-                    "type": "number",
-                    "example": 0.2
-                },
-                "compare_other_change_rate": {
-                    "description": "相对对照数据的变化率",
-                    "type": "number",
-                    "example": 0.2
-                },
-                "compare_other_num": {
-                    "description": "对照其他公司天数",
-                    "type": "integer",
-                    "example": 1
-                },
-                "compare_threshold": {
-                    "description": "较阈值",
-                    "type": "number",
-                    "example": -0.2
-                },
-                "compared_data_average_amount": {
-                    "description": "如 上周平均量",
-                    "type": "number",
-                    "example": 100
-                },
-                "compared_data_average_concentration": {
-                    "description": "如 上周平均浓度",
-                    "type": "number",
-                    "example": 2.5
-                },
-                "danger_num": {
-                    "description": "疑似违规天数",
-                    "type": "integer",
-                    "example": 1
-                },
-                "danger_polution_num": {
-                    "description": "对该污染物的疑似违规天数",
-                    "type": "integer",
-                    "example": 1
-                },
-                "port_amount": {
-                    "description": "该排污口排污量",
-                    "type": "number",
-                    "example": 1000
-                },
-                "port_concentration": {
-                    "description": "平均排污浓度",
-                    "type": "number",
-                    "example": 3.5
-                },
-                "port_id": {
-                    "description": "污染口ID",
+                "code": {
                     "type": "string",
-                    "example": "64000000000600100000"
+                    "example": "200"
                 },
-                "port_relative_cpn": {
-                    "description": "其他共用企业id",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "example": [
-                        "123",
-                        " 456",
-                        " 789"
-                    ]
+                "data": {
+                    "description": "单个污染物视图下的相关数据",
+                    "$ref": "#/definitions/models.DataModel"
+                },
+                "meta": {
+                    "description": "single为单个污染物模式, all为总览模式",
+                    "type": "string",
+                    "example": "single"
+                },
+                "msg": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "overview": {
+                    "description": "总览视图下的相关数据",
+                    "$ref": "#/definitions/models.OverviewModel"
                 }
             }
         },

@@ -133,6 +133,146 @@ definitions:
         example: success
         type: string
     type: object
+  models.DataModel:
+    properties:
+      average_amount:
+        description: 平均排污量
+        example: 2127.598713285988
+        type: number
+      average_concentration:
+        description: 平均浓度
+        example: 52.787238479217876
+        type: number
+      data1_compare_data2_with_average_amount_loss:
+        description: 较[上周]排污量增长量
+        example: 51.1888359508704
+        type: number
+      data1_compare_data2_with_average_amount_loss_rate:
+        description: 较[上周]排污量增长率
+        example: -0.8009344011185189
+        type: number
+      data1_compare_data2_with_average_concentration_loss:
+        description: 较[上周]浓度增长量
+        example: -13.094681522291124
+        type: number
+      data1_compare_data2_with_average_concentration_loss_rate:
+        description: 较[上周]浓度增长率
+        example: -0.8279401442320188
+        type: number
+      date1_amount_test_list:
+        description: 模型重构排放量序列
+        example:
+        - 1853.283905720711
+        - 1853.283905720711
+        - 314.8520582050088
+        items:
+          type: number
+        type: array
+      date1_amount_truth_list:
+        description: 原始采集排放量数据
+        example:
+        - 870.0000334143641
+        - 1757.9999680727722
+        - 1917.9999588906767
+        items:
+          type: number
+        type: array
+      date1_amount_warning_tags:
+        description: 排放量异常日期列表
+        example:
+        - 2020-01-07'
+        - ' ''2020-01-08'''
+        items:
+          type: string
+        type: array
+      date1_amount_warning_tags_count:
+        description: 排放量异常日期数量
+        example: 1
+        type: integer
+      date1_compare_amount_loss_with_threshold:
+        description: 平均排放量异常指数较阈值
+        example: -2375.351830534637
+        type: number
+      date1_compare_concentration_loss_with_threshold:
+        description: 平均浓度异常指数较阈值
+        example: -199.19129530233997
+        type: number
+      date1_concentration_test_list:
+        description: 模型重构浓度序列
+        example:
+        - 90.42889326810837
+        - 90.42889326810837
+        - 71.88690975308418
+        items:
+          type: number
+        type: array
+      date1_concentration_truth_list:
+        description: 原始采集浓度数据
+        example:
+        - 66.25000024214387
+        - 73.17999936640263
+        items:
+          type: number
+        type: array
+      date1_concentration_warning_tags:
+        description: 浓度异常日期列表
+        example:
+        - '''2020-01-07'''
+        - ' ''2020-01-08'''
+        items:
+          type: string
+        type: array
+      date1_concentration_warning_tags_count:
+        description: 浓度异常日期数量
+        example: 1
+        type: integer
+      date2_amount_truth_list:
+        description: '[上周]原始采集排放量数据'
+        example:
+        - 870.0000334143641
+        - 1757.9999680727722
+        - 1917.9999588906767
+        items:
+          type: number
+        type: array
+      date2_average_amount_truth:
+        description: '[上周]平均排污量'
+        example: 2127.598713285988
+        type: number
+      date2_average_concentration_truth:
+        description: '[上周]平均浓度'
+        example: 52.787238479217876
+        type: number
+      date2_concentration_truth_list:
+        description: '[上周]原始采集浓度数据'
+        example:
+        - 66.25000024214387
+        - 73.17999936640263
+        items:
+          type: number
+        type: array
+      polution_id:
+        description: 污染物ID
+        example: w00000
+        type: string
+      port_average_amount:
+        description: 排放口平均排污量
+        example: 2127.598713285988
+        type: number
+      port_total_concentration:
+        description: 排放口总浓度
+        example: 61295.512913
+        type: number
+      relative_cpn:
+        description: 排放口关联公司
+        example:
+        - "123"
+        - "456"
+        - "789"
+        items:
+          type: string
+        type: array
+    type: object
   models.DisplayRequest:
     properties:
       idx1:
@@ -193,6 +333,57 @@ definitions:
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3MjgwMDAwMDg5OSIsImlhdCI6MTU4NjQwMjQ5NywiZXhwIjoxNTg2NDAyNzk3fQ.
         type: string
     type: object
+  models.OverviewModel:
+    properties:
+      compare_total_amount_warning_count:
+        description: 较[上周] 总览排放量异常次数增加
+        example: 1
+        type: integer
+      compare_total_amount_warning_count_rate:
+        description: 较[上周] 总览排放量异常次数增加率, 如果为-1,则表明[上周]排放量没有异常
+        example: -0.8279401442320188
+        type: number
+      compare_total_concentration_warning_count:
+        description: 较[上周] 总览浓度异常次数增加
+        example: 1
+        type: integer
+      compare_total_concentration_warning_count_rate:
+        description: 较[上周] 总览浓度异常次数增加率, 如果为-1,则表明[上周]浓度没有异常
+        example: -0.8279401442320188
+        type: number
+      compare_total_warning_count:
+        description: 较[上周] 总览排放量和浓度异常次数增加
+        example: 1
+        type: integer
+      compare_total_warning_count_rate:
+        description: 较[上周] 总览排放量和浓度异常次数增加率
+        example: -0.8279401442320188
+        type: number
+      date1_total_amount_warning_count:
+        description: '[本周] 总览排放量异常次数'
+        example: 1
+        type: integer
+      date1_total_concentration_warning_count:
+        description: '[本周] 总览浓度异常次数'
+        example: 1
+        type: integer
+      date1_total_warning_count:
+        description: '[本周] 总览浓度与排放量异常总次数'
+        example: 1
+        type: integer
+      date2_total_amount_warning_count:
+        description: '[上周] 总览排放量异常次数'
+        example: 1
+        type: integer
+      date2_total_concentration_warning_count:
+        description: '[上周] 总览浓度异常次数'
+        example: 1
+        type: integer
+      date2_total_warning_count:
+        description: '[上周] 总览浓度与排放量异常总次数'
+        example: 1
+        type: integer
+    type: object
   models.RunModelRequest:
     properties:
       company_id:
@@ -217,80 +408,39 @@ definitions:
         type: string
       polution_id:
         description: 污染物ID
-        example: w00000
+        example: w00000  如果为空就跑总览信息
         type: string
       port_id:
         description: 污染口ID
         example: "64000000000600100000"
         type: string
-      threshold:
-        description: 阈值
-        example: "100"
+      threshold_amount_loss:
+        description: 排放量损失阈值
+        example: "2000.0"
+        type: string
+      threshold_concentration_loss:
+        description: 浓度损失阈值
+        example: "200.0"
         type: string
     type: object
   models.RunModelRespData:
     properties:
-      average_amount:
-        description: 平均量
-        example: 100
-        type: number
-      average_concentration:
-        description: 平均浓度
-        example: 0.2
-        type: number
-      compare_other_change:
-        description: 相对对照数据的变化
-        example: 0.2
-        type: number
-      compare_other_change_rate:
-        description: 相对对照数据的变化率
-        example: 0.2
-        type: number
-      compare_other_num:
-        description: 对照其他公司天数
-        example: 1
-        type: integer
-      compare_threshold:
-        description: 较阈值
-        example: -0.2
-        type: number
-      compared_data_average_amount:
-        description: 如 上周平均量
-        example: 100
-        type: number
-      compared_data_average_concentration:
-        description: 如 上周平均浓度
-        example: 2.5
-        type: number
-      danger_num:
-        description: 疑似违规天数
-        example: 1
-        type: integer
-      danger_polution_num:
-        description: 对该污染物的疑似违规天数
-        example: 1
-        type: integer
-      port_amount:
-        description: 该排污口排污量
-        example: 1000
-        type: number
-      port_concentration:
-        description: 平均排污浓度
-        example: 3.5
-        type: number
-      port_id:
-        description: 污染口ID
-        example: "64000000000600100000"
+      code:
+        example: "200"
         type: string
-      port_relative_cpn:
-        description: 其他共用企业id
-        example:
-        - "123"
-        - ' 456'
-        - ' 789'
-        items:
-          type: string
-        type: array
+      data:
+        $ref: '#/definitions/models.DataModel'
+        description: 单个污染物视图下的相关数据
+      meta:
+        description: single为单个污染物模式, all为总览模式
+        example: single
+        type: string
+      msg:
+        example: success
+        type: string
+      overview:
+        $ref: '#/definitions/models.OverviewModel'
+        description: 总览视图下的相关数据
     type: object
   models.RunModelResponse:
     properties:
