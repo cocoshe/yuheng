@@ -153,7 +153,7 @@ type DateList struct {
 }
 
 type InfoReq struct {
-	CompanyId string `json:"company_id" example:"123"` // 公司ID
+	CompanyId string `json:"company_id" example:"17280000089583"` // 公司ID
 }
 
 type InfoResp struct {
