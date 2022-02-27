@@ -1058,7 +1058,7 @@ const docTemplate_swagger = `{
                 "company_id": {
                     "description": "公司ID",
                     "type": "string",
-                    "example": "123"
+                    "example": "17280000089583"
                 }
             }
         },

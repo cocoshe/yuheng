@@ -308,7 +308,7 @@ definitions:
     properties:
       company_id:
         description: 公司ID
-        example: "123"
+        example: "17280000089583"
         type: string
     type: object
   models.InfoResp:
