@@ -155,3 +155,7 @@ type InfoResp struct {
 	PortIds     []string `json:"port_ids" example:"64000000000600100000,64000000000600100000,64000000000600100000"` // 排污口ID
 	PolutionIds []string `json:"polution_ids" example:"w00000,w00001,w00010"`                                       // 污染物ID
 }
+
+type InfoRespDto struct {
+	Data InfoResp `json:"data"`
+}

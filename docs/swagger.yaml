@@ -304,6 +304,34 @@ definitions:
         example: token invalid
         type: string
     type: object
+  models.InfoReq:
+    properties:
+      company_id:
+        description: 公司ID
+        example: "123"
+        type: string
+    type: object
+  models.InfoResp:
+    properties:
+      polution_ids:
+        description: 污染物ID
+        example:
+        - w00000
+        - w00001
+        - w00010
+        items:
+          type: string
+        type: array
+      port_ids:
+        description: 排污口ID
+        example:
+        - "64000000000600100000"
+        - "64000000000600100000"
+        - "64000000000600100000"
+        items:
+          type: string
+        type: array
+    type: object
   models.JSONid:
     properties:
       id:
@@ -751,6 +779,26 @@ paths:
       summary: 返回所有的企业申诉信息给政府视图
       tags:
       - gvmt(admin)
+  /info:
+    post:
+      consumes:
+      - application/json
+      description: 获得企业的port_id和polution_id
+      parameters:
+      - description: 企业id
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.InfoReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.InfoResp'
+      summary: 获得企业的port_id和polution_id
   /login:
     post:
       consumes:

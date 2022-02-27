@@ -445,6 +445,37 @@
                 }
             }
         },
+        "/info": {
+            "post": {
+                "description": "获得企业的port_id和polution_id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "获得企业的port_id和polution_id",
+                "parameters": [
+                    {
+                        "description": "企业id",
+                        "name": "object",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.InfoReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.InfoResp"
+                        }
+                    }
+                }
+            }
+        },
         "/login": {
             "post": {
                 "description": "登录",
@@ -1006,6 +1037,45 @@
                 "msg": {
                     "type": "string",
                     "example": "token invalid"
+                }
+            }
+        },
+        "models.InfoReq": {
+            "type": "object",
+            "properties": {
+                "company_id": {
+                    "description": "公司ID",
+                    "type": "string",
+                    "example": "123"
+                }
+            }
+        },
+        "models.InfoResp": {
+            "type": "object",
+            "properties": {
+                "polution_ids": {
+                    "description": "污染物ID",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "w00000",
+                        "w00001",
+                        "w00010"
+                    ]
+                },
+                "port_ids": {
+                    "description": "排污口ID",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "64000000000600100000",
+                        "64000000000600100000",
+                        "64000000000600100000"
+                    ]
                 }
             }
         },

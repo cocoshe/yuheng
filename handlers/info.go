@@ -12,7 +12,6 @@ import (
 // @Produce      json
 // @Param         object body models.InfoReq true "企业id"
 // @Success 200 object models.InfoResp
-// @Failure 401 object models.FailureResponse
 // @Router       /info [post]
 func InfoHandler(c *gin.Context) {
 	var req models.InfoReq
@@ -83,6 +82,6 @@ func InfoHandler(c *gin.Context) {
 	//time.Now().Format("1/2/2006 15:04:05")
 	//fmt.Println(time.Now().Format("02/01/2006 15:04:05"))
 
-	c.JSON(200, gin.H{"data": resp})
+	c.JSON(200, resp)
 
 }
