@@ -147,6 +147,11 @@ type OverviewModel struct {
 	Date2TotalWarningCount                    int     `json:"date2_total_warning_count" example:"1"`                                        // [上周] 总览浓度与排放量异常总次数
 }
 
+type DateList struct {
+	Date1 []string `json:"date1" example:"2019-01-01,2019-01-02,2019-01-03,2019-01-04,2019-01-05,2019-01-06,2019-01-07"` // 当前检测时段的日期列表
+	Date2 []string `json:"date2" example:"2019-01-01,2019-01-02,2019-01-03,2019-01-04,2019-01-05,2019-01-06,2019-01-07"` // [上周]检测时段的日期列表
+}
+
 type InfoReq struct {
 	CompanyId string `json:"company_id" example:"123"` // 公司ID
 }
