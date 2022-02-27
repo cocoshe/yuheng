@@ -146,3 +146,12 @@ type OverviewModel struct {
 	Date2TotalConcentrationWarningCount       int     `json:"date2_total_concentration_warning_count" example:"1"`                          // [上周] 总览浓度异常次数
 	Date2TotalWarningCount                    int     `json:"date2_total_warning_count" example:"1"`                                        // [上周] 总览浓度与排放量异常总次数
 }
+
+type InfoReq struct {
+	CompanyId string `json:"company_id" example:"123"` // 公司ID
+}
+
+type InfoResp struct {
+	PortIds     []string `json:"port_ids" example:"64000000000600100000,64000000000600100000,64000000000600100000"` // 排污口ID
+	PolutionIds []string `json:"polution_ids" example:"w00000,w00001,w00010"`                                       // 污染物ID
+}
