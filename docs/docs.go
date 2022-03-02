@@ -253,7 +253,7 @@ const docTemplate_swagger = `{
                 "summary": "展示可疑公司及其状态(传入两个索引)",
                 "parameters": [
                     {
-                        "description": "传入两个索引",
+                        "description": "传入两个索引(降序黑榜)",
                         "name": "object",
                         "in": "body",
                         "required": true,
@@ -376,7 +376,7 @@ const docTemplate_swagger = `{
                 "summary": "政府修改企业状态",
                 "parameters": [
                     {
-                        "description": "修改公司状态为status, 1为正常, 2为可疑违规",
+                        "description": "修改公司状态为status, 1为正常, 2为可疑违规(改: 1为减一次, 2为加一次, 3为归零)",
                         "name": "object",
                         "in": "body",
                         "required": true,
