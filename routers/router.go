@@ -16,6 +16,7 @@ func RegisterRoutes(r *gin.Engine) {
 
 	r.POST("/display", handlers.DisplayHandler)
 	r.POST("/displayBad", handlers.DisplayBadHandler)
+	r.POST("/rank", handlers.DisplayRank)
 	r.POST("/insight", handlers.InsightHandler)
 	r.POST("/addAtten", handlers.AddAttenHandler)
 	r.POST("/delAtten", handlers.DelAttenHandler)
