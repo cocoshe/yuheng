@@ -68,6 +68,12 @@ type DisplayResponse struct {
 	Data []Company `json:"data"`
 }
 
+type RankResponse struct {
+	Code string `json:"code" example:"200"`
+	Msg  string `json:"msg" example:"success"`
+	Data []User `json:"data"`
+}
+
 type JSONid struct {
 	Id string `json:"id" example:"17280000089799"`
 }

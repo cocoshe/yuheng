@@ -525,6 +525,43 @@ const docTemplate_swagger = `{
                 }
             }
         },
+        "/rank": {
+            "post": {
+                "description": "展示用户排名",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "展示用户排名",
+                "parameters": [
+                    {
+                        "description": "传入两个索引",
+                        "name": "object",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.DisplayRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回用户排名",
+                        "schema": {
+                            "$ref": "#/definitions/models.RankResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/models.FailureResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/run": {
             "post": {
                 "description": "运行模型, 得到相关数据和结论",
@@ -1197,6 +1234,25 @@ const docTemplate_swagger = `{
                 }
             }
         },
+        "models.RankResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "example": "200"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.User"
+                    }
+                },
+                "msg": {
+                    "type": "string",
+                    "example": "success"
+                }
+            }
+        },
         "models.RunModelRequest": {
             "type": "object",
             "properties": {
@@ -1299,6 +1355,35 @@ const docTemplate_swagger = `{
                 "msg": {
                     "type": "string",
                     "example": "success"
+                }
+            }
+        },
+        "models.User": {
+            "type": "object",
+            "properties": {
+                "atten": {
+                    "description": "关注",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "账号",
+                    "type": "string"
+                },
+                "level": {
+                    "description": "权限",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "昵称/姓名",
+                    "type": "string"
+                },
+                "pwd": {
+                    "description": "密码",
+                    "type": "string"
+                },
+                "reward": {
+                    "description": "积分",
+                    "type": "integer"
                 }
             }
         },

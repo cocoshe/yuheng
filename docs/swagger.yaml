@@ -412,6 +412,19 @@ definitions:
         example: 1
         type: integer
     type: object
+  models.RankResponse:
+    properties:
+      code:
+        example: "200"
+        type: string
+      data:
+        items:
+          $ref: '#/definitions/models.User'
+        type: array
+      msg:
+        example: success
+        type: string
+    type: object
   models.RunModelRequest:
     properties:
       company_id:
@@ -489,6 +502,27 @@ definitions:
       msg:
         example: success
         type: string
+    type: object
+  models.User:
+    properties:
+      atten:
+        description: 关注
+        type: string
+      id:
+        description: 账号
+        type: string
+      level:
+        description: 权限
+        type: integer
+      name:
+        description: 昵称/姓名
+        type: string
+      pwd:
+        description: 密码
+        type: string
+      reward:
+        description: 积分
+        type: integer
     type: object
   models.UserPostDto:
     properties:
@@ -823,6 +857,30 @@ paths:
           schema:
             $ref: '#/definitions/models.FailureResponse'
       summary: 登录
+  /rank:
+    post:
+      consumes:
+      - application/json
+      description: 展示用户排名
+      parameters:
+      - description: 传入两个索引
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.DisplayRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 返回用户排名
+          schema:
+            $ref: '#/definitions/models.RankResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/models.FailureResponse'
+      summary: 展示用户排名
   /run:
     post:
       consumes:

@@ -14,7 +14,7 @@ import (
 // @Accept       json
 // @Produce      json
 // @Param         object body models.DisplayRequest true "传入两个索引"
-// @Success 200 object models.DisplayResponse
+// @Success 200 object models.RankResponse "返回用户排名"
 // @Failure 401 object models.FailureResponse
 // @Router       /rank [post]
 func DisplayRank(c *gin.Context) {
