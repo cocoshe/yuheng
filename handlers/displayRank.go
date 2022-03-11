@@ -16,7 +16,7 @@ import (
 // @Param         object body models.DisplayRequest true "传入两个索引"
 // @Success 200 object models.DisplayResponse
 // @Failure 401 object models.FailureResponse
-// @Router       /displayBad [post]
+// @Router       /rank [post]
 func DisplayRank(c *gin.Context) {
 
 	//var company_infos []models.Company
