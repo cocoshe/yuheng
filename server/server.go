@@ -11,7 +11,11 @@ import (
 func Run(httpServer *gin.Engine) {
 	//服务配置
 	httpServer = gin.Default()
-	httpServer.Use(cors.Default())
+	corsConf := cors.DefaultConfig()
+	corsConf.AllowAllOrigins = true
+	corsConf.AddAllowHeaders("Authorization")
+
+	httpServer.Use(cors.New(corsConf))
 
 	httpServer.LoadHTMLGlob(config.GlobalConfig.GetString("httpEngine.templates"))
 	//注册路由

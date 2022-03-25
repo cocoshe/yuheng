@@ -19,7 +19,7 @@ import (
 // @Router       /display [post]
 func DisplayHandler(c *gin.Context) {
 
-	var company_infos []models.Company
+	var company_infos []models.CompanyDto
 
 	var company models.DisplayRequest
 	err := c.BindJSON(&company)

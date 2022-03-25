@@ -21,6 +21,7 @@ func init() {
 		config.GlobalConfig.GetString("db.Port"),
 		config.GlobalConfig.GetString("db.DB"),
 	)
+	fmt.Println(config.GlobalConfig.GetString("db.Addr"))
 
 	// connect and open db connection
 	var err error

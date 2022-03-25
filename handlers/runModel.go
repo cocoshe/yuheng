@@ -11,8 +11,8 @@ import (
 // @Description  运行模型, 得到相关数据和结论
 // @Accept       json
 // @Produce      json
-// @Param       object body models.RunModelRequest true "模型运行请求(现在是一些必选项, 后续可以传入自定义的阈值等要求)"
-// @Success 200 object models.RunModelResponse "运行结果"
+// @Param       object body models.RunModelRequest
+// @Success 200 object models.SelfCheckResp
 // @Router       /run [post]
 func RunHandler(c *gin.Context) {
 	ip := config.GlobalConfig.GetString("db.ip")

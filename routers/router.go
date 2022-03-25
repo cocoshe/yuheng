@@ -23,6 +23,7 @@ func RegisterRoutes(r *gin.Engine) {
 	r.GET("/attenInfo", handlers.AttenInfoHandler)
 	r.POST("/run", handlers.RunHandler) // export GOROOT=/d/sdk/go1.17.2
 	r.POST("/info", handlers.InfoHandler)
+	r.POST("/selfcheck", handlers.SelfCheckHandler)
 
 	r.GET("/index", handlers.IndexHandler)
 	r.GET("/ping", handlers.PingHandler)
