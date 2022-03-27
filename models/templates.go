@@ -176,10 +176,19 @@ type SelfCheckReq struct {
 }
 
 type SelfCheckResp struct {
-	Loss            []float64 `json:"loss"`              // 重构前后差值
 	RebuildData     []float64 `json:"rebuild_data"`      // 重构后的序列
 	AbnormalDateIdx []int     `json:"abnormal_date_idx"` // 异常的日期索引
 	OriginAvg       float64   `json:"origin_avg"`        // 原始序列平均值
 	RebuildAvg      float64   `json:"rebuild_avg"`       // 重构后序列在平均值
 
+}
+
+type ChangeThresholdReq struct {
+	Feature   string  ` json:"feature" gorm:"column:feature"`
+	Threshold float64 `json:"threshold" gorm:"column:threshold"`
+}
+
+type GetFeaturesResp struct {
+	Features []string `json:"features"`
+	SuccessResponse
 }

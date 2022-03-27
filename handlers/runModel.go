@@ -19,6 +19,6 @@ func RunHandler(c *gin.Context) {
 	r := fmt.Sprintf("http://%s:5000/run", ip)
 	//log.Println("redirect: ", r)
 	c.Redirect(http.StatusPermanentRedirect, r)
-	//c.Redirect(http.StatusMovedPermanently, "http://127.0.0.1:5000/run")
+	//c.Redirect(http.StatusMovedPermanently, "http://127.0.0.1:5001/run")
 
 }

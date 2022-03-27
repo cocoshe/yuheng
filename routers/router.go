@@ -24,6 +24,7 @@ func RegisterRoutes(r *gin.Engine) {
 	r.POST("/run", handlers.RunHandler) // export GOROOT=/d/sdk/go1.17.2
 	r.POST("/info", handlers.InfoHandler)
 	r.POST("/selfcheck", handlers.SelfCheckHandler)
+	r.GET("/getFeatures", handlers.GetFeaturesHandler)
 
 	r.GET("/index", handlers.IndexHandler)
 	r.GET("/ping", handlers.PingHandler)
@@ -34,7 +35,7 @@ func RegisterRoutes(r *gin.Engine) {
 		gvmtGroup.POST("/changeStatus", gvmt.ChangeStatus)
 		gvmtGroup.POST("/changeAccusStatus", gvmt.ChangeAccusStatus)
 		gvmtGroup.POST("/changeAplStatus", gvmt.ChangeAplStatus)
-
+		gvmtGroup.POST("/changeThreshold", gvmt.ChangeThreshold)
 		// 查看群众上传的举报视图
 		gvmtGroup.GET("/getAccusationList", gvmt.GetAccusationList)
 	}
