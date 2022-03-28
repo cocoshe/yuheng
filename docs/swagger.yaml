@@ -758,6 +758,26 @@ paths:
     post:
       consumes:
       - application/json
+      description: 运行模型, 得到相关数据和结论
+      parameters:
+      - description: 运行模型请求
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.RunModelRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.RunModelResp'
+      summary: 运行模型, 得到相关数据和结论
+  /selfcheck:
+    post:
+      consumes:
+      - application/json
       description: 自主分析
       parameters:
       - description: 模型运行请求(现在是一些必选项, 后续可以传入自定义的阈值等要求)

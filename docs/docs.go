@@ -623,6 +623,37 @@ const docTemplate_swagger = `{
         },
         "/run": {
             "post": {
+                "description": "运行模型, 得到相关数据和结论",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "运行模型, 得到相关数据和结论",
+                "parameters": [
+                    {
+                        "description": "运行模型请求",
+                        "name": "object",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.RunModelRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.RunModelResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/selfcheck": {
+            "post": {
                 "description": "自主分析",
                 "consumes": [
                     "application/json"
