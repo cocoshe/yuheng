@@ -9,16 +9,18 @@ import (
 // @Description  拿到所有的特征名
 // @Accept       json
 // @Produce      json
-// @Param         object body models.ChangeThresholdReq
-// @Success 200 object models.GetFeaturesResp
+// @Success 200  features and threshold
 // @Router       /getFeatures [get]
 func GetFeaturesHandler(c *gin.Context) {
-	var features []string
-	var threshold []float64
-	drivers.MysqlDb.Table("threshold").Find(&features).Find(&threshold)
+	var threshold_body []struct {
+		Features  string  `json:"features"`
+		Threshold float64 `json:"threshold"`
+	}
+	drivers.MysqlDb.Table("threshold").Find(&threshold_body)
+	thresholdDict := make(map[string]float64)
 
-	c.JSON(200, gin.H{
-		"features":  features,
-		"threshold": threshold,
-	})
+	for _, v := range threshold_body {
+		thresholdDict[v.Features] = v.Threshold
+	}
+	c.JSON(200, thresholdDict)
 }

@@ -278,6 +278,26 @@ const docTemplate_swagger = `{
                 }
             }
         },
+        "/getFeatures": {
+            "get": {
+                "description": "拿到所有的特征名",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "拿到所有的特征名",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "features"
+                        }
+                    }
+                }
+            }
+        },
         "/gvmt/changeAccusStatus": {
             "post": {
                 "security": [
@@ -382,6 +402,45 @@ const docTemplate_swagger = `{
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/models.Company"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.SuccessResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/gvmt/changeThreshold": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "修改某个指标的阈值",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "gvmt(admin)"
+                ],
+                "summary": "修改某个指标的阈值",
+                "parameters": [
+                    {
+                        "description": "修改某个指标的阈值",
+                        "name": "object",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ChangeThresholdReq"
                         }
                     }
                 ],
@@ -564,14 +623,14 @@ const docTemplate_swagger = `{
         },
         "/run": {
             "post": {
-                "description": "运行模型, 得到相关数据和结论",
+                "description": "自主分析",
                 "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
                 ],
-                "summary": "运行模型, 得到相关数据和结论",
+                "summary": "自主分析",
                 "parameters": [
                     {
                         "description": "模型运行请求(现在是一些必选项, 后续可以传入自定义的阈值等要求)",
@@ -587,7 +646,7 @@ const docTemplate_swagger = `{
                     "200": {
                         "description": "运行结果",
                         "schema": {
-                            "$ref": "#/definitions/models.RunModelResponse"
+                            "$ref": "#/definitions/models.RunModelResp"
                         }
                     }
                 }
@@ -811,6 +870,17 @@ const docTemplate_swagger = `{
                 }
             }
         },
+        "models.ChangeThresholdReq": {
+            "type": "object",
+            "properties": {
+                "features": {
+                    "type": "string"
+                },
+                "threshold": {
+                    "type": "number"
+                }
+            }
+        },
         "models.Company": {
             "type": "object",
             "properties": {
@@ -857,190 +927,6 @@ const docTemplate_swagger = `{
                 "msg": {
                     "type": "string",
                     "example": "success"
-                }
-            }
-        },
-        "models.DataModel": {
-            "type": "object",
-            "properties": {
-                "average_amount": {
-                    "description": "平均排污量",
-                    "type": "number",
-                    "example": 2127.598713285988
-                },
-                "average_concentration": {
-                    "description": "平均浓度",
-                    "type": "number",
-                    "example": 52.787238479217876
-                },
-                "data1_compare_data2_with_average_amount_loss": {
-                    "description": "较[上周]排污量增长量",
-                    "type": "number",
-                    "example": 51.1888359508704
-                },
-                "data1_compare_data2_with_average_amount_loss_rate": {
-                    "description": "较[上周]排污量增长率",
-                    "type": "number",
-                    "example": -0.8009344011185189
-                },
-                "data1_compare_data2_with_average_concentration_loss": {
-                    "description": "较[上周]浓度增长量",
-                    "type": "number",
-                    "example": -13.094681522291124
-                },
-                "data1_compare_data2_with_average_concentration_loss_rate": {
-                    "description": "较[上周]浓度增长率",
-                    "type": "number",
-                    "example": -0.8279401442320188
-                },
-                "date1_amount_test_list": {
-                    "description": "模型重构排放量序列",
-                    "type": "array",
-                    "items": {
-                        "type": "number"
-                    },
-                    "example": [
-                        1853.283905720711,
-                        1853.283905720711,
-                        314.8520582050088
-                    ]
-                },
-                "date1_amount_truth_list": {
-                    "description": "原始采集排放量数据",
-                    "type": "array",
-                    "items": {
-                        "type": "number"
-                    },
-                    "example": [
-                        870.0000334143641,
-                        1757.9999680727722,
-                        1917.9999588906767
-                    ]
-                },
-                "date1_amount_warning_tags": {
-                    "description": "排放量异常日期列表",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "example": [
-                        "2020-01-07'",
-                        " '2020-01-08'"
-                    ]
-                },
-                "date1_amount_warning_tags_count": {
-                    "description": "排放量异常日期数量",
-                    "type": "integer",
-                    "example": 1
-                },
-                "date1_compare_amount_loss_with_threshold": {
-                    "description": "平均排放量异常指数较阈值",
-                    "type": "number",
-                    "example": -2375.351830534637
-                },
-                "date1_compare_concentration_loss_with_threshold": {
-                    "description": "平均浓度异常指数较阈值",
-                    "type": "number",
-                    "example": -199.19129530233997
-                },
-                "date1_concentration_test_list": {
-                    "description": "模型重构浓度序列",
-                    "type": "array",
-                    "items": {
-                        "type": "number"
-                    },
-                    "example": [
-                        90.42889326810837,
-                        90.42889326810837,
-                        71.88690975308418
-                    ]
-                },
-                "date1_concentration_truth_list": {
-                    "description": "原始采集浓度数据",
-                    "type": "array",
-                    "items": {
-                        "type": "number"
-                    },
-                    "example": [
-                        66.25000024214387,
-                        73.17999936640263
-                    ]
-                },
-                "date1_concentration_warning_tags": {
-                    "description": "浓度异常日期列表",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "example": [
-                        "'2020-01-07'",
-                        " '2020-01-08'"
-                    ]
-                },
-                "date1_concentration_warning_tags_count": {
-                    "description": "浓度异常日期数量",
-                    "type": "integer",
-                    "example": 1
-                },
-                "date2_amount_truth_list": {
-                    "description": "[上周]原始采集排放量数据",
-                    "type": "array",
-                    "items": {
-                        "type": "number"
-                    },
-                    "example": [
-                        870.0000334143641,
-                        1757.9999680727722,
-                        1917.9999588906767
-                    ]
-                },
-                "date2_average_amount_truth": {
-                    "description": "[上周]平均排污量",
-                    "type": "number",
-                    "example": 2127.598713285988
-                },
-                "date2_average_concentration_truth": {
-                    "description": "[上周]平均浓度",
-                    "type": "number",
-                    "example": 52.787238479217876
-                },
-                "date2_concentration_truth_list": {
-                    "description": "[上周]原始采集浓度数据",
-                    "type": "array",
-                    "items": {
-                        "type": "number"
-                    },
-                    "example": [
-                        66.25000024214387,
-                        73.17999936640263
-                    ]
-                },
-                "polution_id": {
-                    "description": "污染物ID",
-                    "type": "string",
-                    "example": "w00000"
-                },
-                "port_average_amount": {
-                    "description": "排放口平均排污量",
-                    "type": "number",
-                    "example": 2127.598713285988
-                },
-                "port_total_concentration": {
-                    "description": "排放口总浓度",
-                    "type": "number",
-                    "example": 61295.512913
-                },
-                "relative_cpn": {
-                    "description": "排放口关联公司",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "example": [
-                        "123",
-                        "456",
-                        "789"
-                    ]
                 }
             }
         },
@@ -1169,71 +1055,6 @@ const docTemplate_swagger = `{
                 }
             }
         },
-        "models.OverviewModel": {
-            "type": "object",
-            "properties": {
-                "compare_total_amount_warning_count": {
-                    "description": "较[上周] 总览排放量异常次数增加",
-                    "type": "integer",
-                    "example": 1
-                },
-                "compare_total_amount_warning_count_rate": {
-                    "description": "较[上周] 总览排放量异常次数增加率, 如果为-1,则表明[上周]排放量没有异常",
-                    "type": "number",
-                    "example": -0.8279401442320188
-                },
-                "compare_total_concentration_warning_count": {
-                    "description": "较[上周] 总览浓度异常次数增加",
-                    "type": "integer",
-                    "example": 1
-                },
-                "compare_total_concentration_warning_count_rate": {
-                    "description": "较[上周] 总览浓度异常次数增加率, 如果为-1,则表明[上周]浓度没有异常",
-                    "type": "number",
-                    "example": -0.8279401442320188
-                },
-                "compare_total_warning_count": {
-                    "description": "较[上周] 总览排放量和浓度异常次数增加",
-                    "type": "integer",
-                    "example": 1
-                },
-                "compare_total_warning_count_rate": {
-                    "description": "较[上周] 总览排放量和浓度异常次数增加率",
-                    "type": "number",
-                    "example": -0.8279401442320188
-                },
-                "date1_total_amount_warning_count": {
-                    "description": "[本周] 总览排放量异常次数",
-                    "type": "integer",
-                    "example": 1
-                },
-                "date1_total_concentration_warning_count": {
-                    "description": "[本周] 总览浓度异常次数",
-                    "type": "integer",
-                    "example": 1
-                },
-                "date1_total_warning_count": {
-                    "description": "[本周] 总览浓度与排放量异常总次数",
-                    "type": "integer",
-                    "example": 1
-                },
-                "date2_total_amount_warning_count": {
-                    "description": "[上周] 总览排放量异常次数",
-                    "type": "integer",
-                    "example": 1
-                },
-                "date2_total_concentration_warning_count": {
-                    "description": "[上周] 总览浓度异常次数",
-                    "type": "integer",
-                    "example": 1
-                },
-                "date2_total_warning_count": {
-                    "description": "[上周] 总览浓度与排放量异常总次数",
-                    "type": "integer",
-                    "example": 1
-                }
-            }
-        },
         "models.RankResponse": {
             "type": "object",
             "properties": {
@@ -1250,6 +1071,41 @@ const docTemplate_swagger = `{
                 "msg": {
                     "type": "string",
                     "example": "success"
+                }
+            }
+        },
+        "models.RunModelOverviewData": {
+            "type": "object",
+            "properties": {
+                "compare_date2_date1_count_of_diff_features": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "compare_date2_date1_of_diff_features": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "compare_date2_date1_rate_of_diff_features": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "date1_warning_count_of_diff_features": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "date2_warning_count_of_diff_features": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
                 }
             }
         },
@@ -1281,67 +1137,65 @@ const docTemplate_swagger = `{
                     "type": "string",
                     "example": "1/3/2020"
                 },
-                "polution_id": {
-                    "description": "污染物ID",
-                    "type": "string",
-                    "example": "w00000"
-                },
                 "port_id": {
                     "description": "污染口ID",
                     "type": "string",
                     "example": "64000000000600100000"
+                }
+            }
+        },
+        "models.RunModelResp": {
+            "type": "object",
+            "properties": {
+                "date1": {
+                    "$ref": "#/definitions/models.RunModelRespData"
                 },
-                "threshold_amount_loss": {
-                    "description": "排放量损失阈值",
-                    "type": "number",
-                    "example": 2000.1
+                "date2": {
+                    "$ref": "#/definitions/models.RunModelRespData"
                 },
-                "threshold_concentration_loss": {
-                    "description": "浓度损失阈值",
-                    "type": "number",
-                    "example": 200.1
+                "overview": {
+                    "$ref": "#/definitions/models.RunModelOverviewData"
                 }
             }
         },
         "models.RunModelRespData": {
             "type": "object",
             "properties": {
-                "code": {
-                    "type": "string",
-                    "example": "200"
+                "abnormal_date": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "04/01/2020",
+                        "05/01/2020",
+                        "06/01/2020",
+                        "07/01/2020"
+                    ]
                 },
-                "data": {
-                    "description": "单个污染物视图下的相关数据",
-                    "$ref": "#/definitions/models.DataModel"
+                "date_list": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "example": [
+                        "01/01/2020",
+                        "02/01/2020",
+                        "03/01/2020",
+                        "04/01/2020",
+                        "05/01/2020",
+                        "06/01/2020",
+                        "07/01/2020"
+                    ]
                 },
-                "meta": {
-                    "description": "single为单个污染物模式, all为总览模式",
-                    "type": "string",
-                    "example": "single"
-                },
-                "msg": {
-                    "type": "string",
-                    "example": "success"
-                },
-                "overview": {
-                    "description": "总览视图下的相关数据",
-                    "$ref": "#/definitions/models.OverviewModel"
-                }
-            }
-        },
-        "models.RunModelResponse": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "string",
-                    "example": "200"
-                },
-                "data": {
-                    "$ref": "#/definitions/models.RunModelRespData"
-                },
-                "msg": {
-                    "type": "string",
-                    "example": "success"
+                "rebuild_data": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        }
+                    }
                 }
             }
         },

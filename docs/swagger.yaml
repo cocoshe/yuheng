@@ -99,6 +99,13 @@ definitions:
         example: success
         type: string
     type: object
+  models.ChangeThresholdReq:
+    properties:
+      features:
+        type: string
+      threshold:
+        type: number
+    type: object
   models.Company:
     properties:
       id:
@@ -132,146 +139,6 @@ definitions:
       msg:
         example: success
         type: string
-    type: object
-  models.DataModel:
-    properties:
-      average_amount:
-        description: 平均排污量
-        example: 2127.598713285988
-        type: number
-      average_concentration:
-        description: 平均浓度
-        example: 52.787238479217876
-        type: number
-      data1_compare_data2_with_average_amount_loss:
-        description: 较[上周]排污量增长量
-        example: 51.1888359508704
-        type: number
-      data1_compare_data2_with_average_amount_loss_rate:
-        description: 较[上周]排污量增长率
-        example: -0.8009344011185189
-        type: number
-      data1_compare_data2_with_average_concentration_loss:
-        description: 较[上周]浓度增长量
-        example: -13.094681522291124
-        type: number
-      data1_compare_data2_with_average_concentration_loss_rate:
-        description: 较[上周]浓度增长率
-        example: -0.8279401442320188
-        type: number
-      date1_amount_test_list:
-        description: 模型重构排放量序列
-        example:
-        - 1853.283905720711
-        - 1853.283905720711
-        - 314.8520582050088
-        items:
-          type: number
-        type: array
-      date1_amount_truth_list:
-        description: 原始采集排放量数据
-        example:
-        - 870.0000334143641
-        - 1757.9999680727722
-        - 1917.9999588906767
-        items:
-          type: number
-        type: array
-      date1_amount_warning_tags:
-        description: 排放量异常日期列表
-        example:
-        - 2020-01-07'
-        - ' ''2020-01-08'''
-        items:
-          type: string
-        type: array
-      date1_amount_warning_tags_count:
-        description: 排放量异常日期数量
-        example: 1
-        type: integer
-      date1_compare_amount_loss_with_threshold:
-        description: 平均排放量异常指数较阈值
-        example: -2375.351830534637
-        type: number
-      date1_compare_concentration_loss_with_threshold:
-        description: 平均浓度异常指数较阈值
-        example: -199.19129530233997
-        type: number
-      date1_concentration_test_list:
-        description: 模型重构浓度序列
-        example:
-        - 90.42889326810837
-        - 90.42889326810837
-        - 71.88690975308418
-        items:
-          type: number
-        type: array
-      date1_concentration_truth_list:
-        description: 原始采集浓度数据
-        example:
-        - 66.25000024214387
-        - 73.17999936640263
-        items:
-          type: number
-        type: array
-      date1_concentration_warning_tags:
-        description: 浓度异常日期列表
-        example:
-        - '''2020-01-07'''
-        - ' ''2020-01-08'''
-        items:
-          type: string
-        type: array
-      date1_concentration_warning_tags_count:
-        description: 浓度异常日期数量
-        example: 1
-        type: integer
-      date2_amount_truth_list:
-        description: '[上周]原始采集排放量数据'
-        example:
-        - 870.0000334143641
-        - 1757.9999680727722
-        - 1917.9999588906767
-        items:
-          type: number
-        type: array
-      date2_average_amount_truth:
-        description: '[上周]平均排污量'
-        example: 2127.598713285988
-        type: number
-      date2_average_concentration_truth:
-        description: '[上周]平均浓度'
-        example: 52.787238479217876
-        type: number
-      date2_concentration_truth_list:
-        description: '[上周]原始采集浓度数据'
-        example:
-        - 66.25000024214387
-        - 73.17999936640263
-        items:
-          type: number
-        type: array
-      polution_id:
-        description: 污染物ID
-        example: w00000
-        type: string
-      port_average_amount:
-        description: 排放口平均排污量
-        example: 2127.598713285988
-        type: number
-      port_total_concentration:
-        description: 排放口总浓度
-        example: 61295.512913
-        type: number
-      relative_cpn:
-        description: 排放口关联公司
-        example:
-        - "123"
-        - "456"
-        - "789"
-        items:
-          type: string
-        type: array
     type: object
   models.DisplayRequest:
     properties:
@@ -361,57 +228,6 @@ definitions:
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3MjgwMDAwMDg5OSIsImlhdCI6MTU4NjQwMjQ5NywiZXhwIjoxNTg2NDAyNzk3fQ.
         type: string
     type: object
-  models.OverviewModel:
-    properties:
-      compare_total_amount_warning_count:
-        description: 较[上周] 总览排放量异常次数增加
-        example: 1
-        type: integer
-      compare_total_amount_warning_count_rate:
-        description: 较[上周] 总览排放量异常次数增加率, 如果为-1,则表明[上周]排放量没有异常
-        example: -0.8279401442320188
-        type: number
-      compare_total_concentration_warning_count:
-        description: 较[上周] 总览浓度异常次数增加
-        example: 1
-        type: integer
-      compare_total_concentration_warning_count_rate:
-        description: 较[上周] 总览浓度异常次数增加率, 如果为-1,则表明[上周]浓度没有异常
-        example: -0.8279401442320188
-        type: number
-      compare_total_warning_count:
-        description: 较[上周] 总览排放量和浓度异常次数增加
-        example: 1
-        type: integer
-      compare_total_warning_count_rate:
-        description: 较[上周] 总览排放量和浓度异常次数增加率
-        example: -0.8279401442320188
-        type: number
-      date1_total_amount_warning_count:
-        description: '[本周] 总览排放量异常次数'
-        example: 1
-        type: integer
-      date1_total_concentration_warning_count:
-        description: '[本周] 总览浓度异常次数'
-        example: 1
-        type: integer
-      date1_total_warning_count:
-        description: '[本周] 总览浓度与排放量异常总次数'
-        example: 1
-        type: integer
-      date2_total_amount_warning_count:
-        description: '[上周] 总览排放量异常次数'
-        example: 1
-        type: integer
-      date2_total_concentration_warning_count:
-        description: '[上周] 总览浓度异常次数'
-        example: 1
-        type: integer
-      date2_total_warning_count:
-        description: '[上周] 总览浓度与排放量异常总次数'
-        example: 1
-        type: integer
-    type: object
   models.RankResponse:
     properties:
       code:
@@ -424,6 +240,29 @@ definitions:
       msg:
         example: success
         type: string
+    type: object
+  models.RunModelOverviewData:
+    properties:
+      compare_date2_date1_count_of_diff_features:
+        items:
+          type: integer
+        type: array
+      compare_date2_date1_of_diff_features:
+        items:
+          type: number
+        type: array
+      compare_date2_date1_rate_of_diff_features:
+        items:
+          type: number
+        type: array
+      date1_warning_count_of_diff_features:
+        items:
+          type: integer
+        type: array
+      date2_warning_count_of_diff_features:
+        items:
+          type: integer
+        type: array
     type: object
   models.RunModelRequest:
     properties:
@@ -447,52 +286,49 @@ definitions:
         description: 日/月/年,对照数据开始时间
         example: 1/3/2020
         type: string
-      polution_id:
-        description: 污染物ID
-        example: w00000
-        type: string
       port_id:
         description: 污染口ID
         example: "64000000000600100000"
         type: string
-      threshold_amount_loss:
-        description: 排放量损失阈值
-        example: 2000.1
-        type: number
-      threshold_concentration_loss:
-        description: 浓度损失阈值
-        example: 200.1
-        type: number
+    type: object
+  models.RunModelResp:
+    properties:
+      date1:
+        $ref: '#/definitions/models.RunModelRespData'
+      date2:
+        $ref: '#/definitions/models.RunModelRespData'
+      overview:
+        $ref: '#/definitions/models.RunModelOverviewData'
     type: object
   models.RunModelRespData:
     properties:
-      code:
-        example: "200"
-        type: string
-      data:
-        $ref: '#/definitions/models.DataModel'
-        description: 单个污染物视图下的相关数据
-      meta:
-        description: single为单个污染物模式, all为总览模式
-        example: single
-        type: string
-      msg:
-        example: success
-        type: string
-      overview:
-        $ref: '#/definitions/models.OverviewModel'
-        description: 总览视图下的相关数据
-    type: object
-  models.RunModelResponse:
-    properties:
-      code:
-        example: "200"
-        type: string
-      data:
-        $ref: '#/definitions/models.RunModelRespData'
-      msg:
-        example: success
-        type: string
+      abnormal_date:
+        example:
+        - 04/01/2020
+        - 05/01/2020
+        - 06/01/2020
+        - 07/01/2020
+        items:
+          type: string
+        type: array
+      date_list:
+        example:
+        - 01/01/2020
+        - 02/01/2020
+        - 03/01/2020
+        - 04/01/2020
+        - 05/01/2020
+        - 06/01/2020
+        - 07/01/2020
+        items:
+          type: string
+        type: array
+      rebuild_data:
+        items:
+          items:
+            type: number
+          type: array
+        type: array
     type: object
   models.SuccessResponse:
     properties:
@@ -703,6 +539,19 @@ paths:
           schema:
             $ref: '#/definitions/models.FailureResponse'
       summary: 展示可疑公司及其状态(传入两个索引)
+  /getFeatures:
+    get:
+      consumes:
+      - application/json
+      description: 拿到所有的特征名
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: features
+      summary: 拿到所有的特征名
   /gvmt/changeAccusStatus:
     post:
       consumes:
@@ -773,6 +622,30 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: 政府修改企业状态
+      tags:
+      - gvmt(admin)
+  /gvmt/changeThreshold:
+    post:
+      consumes:
+      - application/json
+      description: 修改某个指标的阈值
+      parameters:
+      - description: 修改某个指标的阈值
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.ChangeThresholdReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SuccessResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: 修改某个指标的阈值
       tags:
       - gvmt(admin)
   /gvmt/getAccusationList:
@@ -885,7 +758,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: 运行模型, 得到相关数据和结论
+      description: 自主分析
       parameters:
       - description: 模型运行请求(现在是一些必选项, 后续可以传入自定义的阈值等要求)
         in: body
@@ -899,8 +772,8 @@ paths:
         "200":
           description: 运行结果
           schema:
-            $ref: '#/definitions/models.RunModelResponse'
-      summary: 运行模型, 得到相关数据和结论
+            $ref: '#/definitions/models.RunModelResp'
+      summary: 自主分析
   /visitor/history:
     get:
       consumes:
