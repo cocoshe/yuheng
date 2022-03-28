@@ -189,6 +189,6 @@ type ChangeThresholdReq struct {
 }
 
 type GetFeaturesResp struct {
-	Features []string `json:"features"`
-	SuccessResponse
+	Features  []string  `json:"features"`
+	Threshold []float64 `json:"threshold"`
 }

@@ -14,8 +14,11 @@ import (
 // @Router       /getFeatures [get]
 func GetFeaturesHandler(c *gin.Context) {
 	var features []string
-	drivers.MysqlDb.Table("threshold").Find(&features)
+	var threshold []float64
+	drivers.MysqlDb.Table("threshold").Find(&features).Find(&threshold)
+
 	c.JSON(200, gin.H{
-		"features": features,
+		"features":  features,
+		"threshold": threshold,
 	})
 }
