@@ -23,9 +23,9 @@ func GetAccusationList(c *gin.Context) {
 
 	for i, acc := range accus {
 		tempId := acc.Id
-		picPath := "accus_img/" + tempId.String() + ".jpg"
+		picPath := "accus_img/" + tempId.String() + "." + acc.PicType
 		f, _ := ioutil.ReadFile(picPath)
-		accus[i].Pic = base64.StdEncoding.EncodeToString(f)
+		accus[i].Pic = "data:image/png;base64," + base64.StdEncoding.EncodeToString(f)
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"code": "200",

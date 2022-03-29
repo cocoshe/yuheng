@@ -4,13 +4,15 @@ import (
 	"backend/drivers"
 	"backend/models"
 	"backend/utils"
+	"encoding/base64"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
 
-// @Summary      返回所有的企业申诉信息给政府视图
-// @Description  返回所有的企业申诉信息给政府视图
+// @Summary      返回自己的举报记录
+// @Description  返回自己的举报记录
 // @Tags         visitor
 // @Accept       json
 // @Produce      json
@@ -35,6 +37,13 @@ func History(c *gin.Context) {
 	log.Print("userId: ", userId)
 	drivers.MysqlDb.Table("accusation").Where("user_id = ?", userId).Find(&accus)
 	//drivers.MysqlDb.Table("user").Where("id = ?", userId).First(&user)
+
+	for i, acc := range accus {
+		tempId := acc.Id
+		picPath := "accus_img/" + tempId.String() + "." + acc.PicType
+		f, _ := ioutil.ReadFile(picPath)
+		accus[i].Pic = "data:image/png;base64," + base64.StdEncoding.EncodeToString(f)
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,

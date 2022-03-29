@@ -33,10 +33,10 @@ func GetAppealList(c *gin.Context) {
 
 	for i, apl := range apls {
 		tempId := apl.Id
-		picPath := "appeal_img/" + tempId.String() + ".jpg"
+		picPath := "appeal_img/" + tempId.String() + "." + apl.PicType
 		f, _ := ioutil.ReadFile(picPath)
 
-		apls[i].Pic = base64.StdEncoding.EncodeToString(f)
+		apls[i].Pic = "data:image/png;base64," + base64.StdEncoding.EncodeToString(f)
 	}
 
 	c.JSON(http.StatusOK, gin.H{

@@ -52,17 +52,25 @@ func Appeal(c *gin.Context) {
 	}
 	//log.Println(pic)
 	if pic != "" {
-		bs64 := pic[strings.IndexByte(pic, ',')+1:]
+		idx1 := strings.IndexByte(pic, ',')
+		bs64 := pic[idx1+1:]
+		prefix := pic[:idx1]
+		idx2 := strings.IndexByte(prefix, '/')
+		idx3 := strings.IndexByte(prefix, ';')
+		picType := prefix[idx2+1 : idx3]
+		apl.PicType = picType
 		decodePic, err := base64.StdEncoding.DecodeString(bs64)
 
 		if err != nil {
 			log.Println(err)
 			return
 		}
-		err = ioutil.WriteFile("appeal_img/"+apl.Id.String()+".jpg", decodePic, 0644)
+		err = ioutil.WriteFile("appeal_img/"+apl.Id.String()+"."+picType, decodePic, 0644)
 		if err != nil {
+			log.Println(err)
 			return
 		}
+		apl.PicType = picType
 	}
 
 	drivers.MysqlDb.Table("appeal").Create(apl)

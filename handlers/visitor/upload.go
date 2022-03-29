@@ -11,6 +11,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -52,13 +53,20 @@ func Upload(c *gin.Context) {
 
 	pic := userPostDto.Pic
 	if pic != "" {
-		decodePic, err := base64.StdEncoding.DecodeString(pic)
+		idx1 := strings.IndexByte(pic, ',')
+		bs64 := pic[idx1+1:]
+		prefix := pic[:idx1]
+		idx2 := strings.IndexByte(prefix, '/')
+		idx3 := strings.IndexByte(prefix, ';')
+		picType := prefix[idx2+1 : idx3]
+		decodePic, err := base64.StdEncoding.DecodeString(bs64)
 
 		if err != nil {
 			log.Println(err)
 			return
 		}
-		err = ioutil.WriteFile("accus_img/"+accus.Id.String()+".jpg", decodePic, 0644)
+		accus.PicType = picType
+		err = ioutil.WriteFile("accus_img/"+accus.Id.String()+"."+picType, decodePic, 0644)
 		if err != nil {
 			return
 		}

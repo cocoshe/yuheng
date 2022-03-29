@@ -135,7 +135,7 @@ const docTemplate_swagger = `{
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "返回所有的企业申诉信息给政府视图",
+                "description": "返回所有的企业申诉信息",
                 "consumes": [
                     "application/json"
                 ],
@@ -145,7 +145,7 @@ const docTemplate_swagger = `{
                 "tags": [
                     "company"
                 ],
-                "summary": "返回所有的企业申诉信息给政府视图",
+                "summary": "返回所有的企业申诉信息",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -664,7 +664,7 @@ const docTemplate_swagger = `{
                 "summary": "自主分析",
                 "parameters": [
                     {
-                        "description": "模型运行请求(现在是一些必选项, 后续可以传入自定义的阈值等要求)",
+                        "description": "自主分析",
                         "name": "object",
                         "in": "body",
                         "required": true,
@@ -690,7 +690,7 @@ const docTemplate_swagger = `{
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "返回所有的企业申诉信息给政府视图",
+                "description": "返回自己的举报记录",
                 "consumes": [
                     "application/json"
                 ],
@@ -700,7 +700,7 @@ const docTemplate_swagger = `{
                 "tags": [
                     "visitor"
                 ],
-                "summary": "返回所有的企业申诉信息给政府视图",
+                "summary": "返回自己的举报记录",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -790,9 +790,12 @@ const docTemplate_swagger = `{
                     "example": "a05cde18-488b-4dc4-afa1-df9e0ccf16a1"
                 },
                 "pic": {
-                    "description": "帖子图片路径",
-                    "type": "string",
-                    "example": "图片内容"
+                    "description": "图片",
+                    "type": "string"
+                },
+                "pic_type": {
+                    "description": "图片类型",
+                    "type": "string"
                 },
                 "post": {
                     "description": "帖子内容",
@@ -861,9 +864,12 @@ const docTemplate_swagger = `{
                     "example": "967d7ae4-1c39-40f8-befd-222d768d70f7"
                 },
                 "pic": {
-                    "description": "帖子图片路径",
-                    "type": "string",
-                    "example": "图片内容"
+                    "description": "图片地址",
+                    "type": "string"
+                },
+                "pic_type": {
+                    "description": "图片类型",
+                    "type": "string"
                 },
                 "post": {
                     "description": "帖子内容",
@@ -879,6 +885,11 @@ const docTemplate_swagger = `{
                     "description": "时间",
                     "type": "string",
                     "example": "2022-01-28T23:45:54+08:00"
+                },
+                "user_id": {
+                    "description": "上传者用户名",
+                    "type": "string",
+                    "example": "上传者用户名"
                 }
             }
         },
