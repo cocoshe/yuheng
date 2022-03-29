@@ -12,6 +12,7 @@ type Accusation struct {
 	Time      time.Time `json:"time" example:"2022-01-28T23:57:30+08:00"` //时间
 	Post      string    `json:"post" example:"文字内容"`                      //帖子内容
 	Status    int       `json:"status" example:"2"`                       //举报状态
+	Pic       string    `json:"pic,omitempty" example:"this is a pic"`    //图片
 }
 
 type Appeal struct {
@@ -21,4 +22,5 @@ type Appeal struct {
 	Post      string    `json:"post" example:"文字内容"`                      //帖子内容
 	UserId    string    `json:"user_id" example:"上传者用户名"`                 //上传者用户名
 	Status    int       `json:"status" example:"2"`                       //举报状态
+	Pic       string    `json:"pic,omitempty" example:"base64"`           //图片地址
 }

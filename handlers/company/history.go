@@ -4,12 +4,14 @@ import (
 	"backend/drivers"
 	"backend/models"
 	"backend/utils"
+	"encoding/base64"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
 	"net/http"
 )
 
-// @Summary      返回所有的企业申诉信息给政府视图
-// @Description  返回所有的企业申诉信息给政府视图
+// @Summary      返回所有的企业申诉信息
+// @Description  返回所有的企业申诉信息
 // @Tags         company
 // @Accept       json
 // @Produce      json
@@ -28,6 +30,13 @@ func History(c *gin.Context) {
 	}
 	var apls []models.Appeal
 	drivers.MysqlDb.Table("appeal").Find(&apls)
+
+	for i, apl := range apls {
+		tempId := apl.Id
+		picPath := "appeal_img/" + tempId.String() + ".jpg"
+		f, _ := ioutil.ReadFile(picPath)
+		apls[i].Pic = base64.StdEncoding.EncodeToString(f)
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"code": 200,

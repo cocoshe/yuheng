@@ -3,7 +3,9 @@ package gvmt
 import (
 	"backend/drivers"
 	"backend/models"
+	"encoding/base64"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
 	"net/http"
 )
 
@@ -19,6 +21,12 @@ func GetAccusationList(c *gin.Context) {
 	var accus []models.Accusation
 	drivers.MysqlDb.Table("accusation").Find(&accus)
 
+	for i, acc := range accus {
+		tempId := acc.Id
+		picPath := "accus_img/" + tempId.String() + ".jpg"
+		f, _ := ioutil.ReadFile(picPath)
+		accus[i].Pic = base64.StdEncoding.EncodeToString(f)
+	}
 	c.JSON(http.StatusOK, gin.H{
 		"code": "200",
 		"data": accus,
