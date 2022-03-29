@@ -5,8 +5,10 @@ import (
 	"backend/middleware"
 	"backend/models"
 	"backend/utils"
+	"encoding/base64"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"time"
@@ -45,8 +47,21 @@ func Upload(c *gin.Context) {
 		UserId:    claim.UserId,
 		Time:      time.Now(),
 		Post:      userPostDto.Post,
-		Pic:       userPostDto.Pic,
 		Status:    middleware.WAITING,
+	}
+
+	pic := userPostDto.Pic
+	if pic != "" {
+		decodePic, err := base64.StdEncoding.DecodeString(pic)
+
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		err = ioutil.WriteFile("accus_img/"+accus.Id.String()+".jpg", decodePic, 0644)
+		if err != nil {
+			return
+		}
 	}
 
 	drivers.MysqlDb.Table("accusation").Create(accus)

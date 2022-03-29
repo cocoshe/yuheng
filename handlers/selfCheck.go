@@ -11,7 +11,7 @@ import (
 // @Description  自主分析
 // @Accept       json
 // @Produce      json
-// @Param       object body models.SelfCheckReq true "模型运行请求(现在是一些必选项, 后续可以传入自定义的阈值等要求)"
+// @Param       object body models.SelfCheckReq true "自主分析"
 // @Success 200 object models.RunModelResp "运行结果"
 // @Router       /selfcheck [post]
 func SelfCheckHandler(c *gin.Context) {
