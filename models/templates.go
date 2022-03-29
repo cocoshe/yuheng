@@ -195,3 +195,11 @@ type RunModelOverviewData struct {
 	Date1WarningCountOfDiffFeatures      []int     `json:"date1_warning_count_of_diff_features"`
 	Date2WarningCountOfDiffFeatures      []int     `json:"date2_warning_count_of_diff_features"`
 }
+
+type SelfCheckReq struct {
+	Data   [][]string `json:"data"`
+	DateS1 string     `json:"date_s_1"`
+	DateS2 string     `json:"date_s_2"`
+	DateE1 string     `json:"date_e_1"`
+	DateE2 string     `json:"date_e_2"`
+}

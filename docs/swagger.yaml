@@ -330,6 +330,23 @@ definitions:
           type: array
         type: array
     type: object
+  models.SelfCheckReq:
+    properties:
+      data:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      date_e_1:
+        type: string
+      date_e_2:
+        type: string
+      date_s_1:
+        type: string
+      date_s_2:
+        type: string
+    type: object
   models.SuccessResponse:
     properties:
       code:
@@ -785,7 +802,7 @@ paths:
         name: object
         required: true
         schema:
-          $ref: '#/definitions/models.RunModelRequest'
+          $ref: '#/definitions/models.SelfCheckReq'
       produces:
       - application/json
       responses:

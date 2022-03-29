@@ -669,7 +669,7 @@ const docTemplate_swagger = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.RunModelRequest"
+                            "$ref": "#/definitions/models.SelfCheckReq"
                         }
                     }
                 ],
@@ -1227,6 +1227,32 @@ const docTemplate_swagger = `{
                             "type": "number"
                         }
                     }
+                }
+            }
+        },
+        "models.SelfCheckReq": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "date_e_1": {
+                    "type": "string"
+                },
+                "date_e_2": {
+                    "type": "string"
+                },
+                "date_s_1": {
+                    "type": "string"
+                },
+                "date_s_2": {
+                    "type": "string"
                 }
             }
         },
