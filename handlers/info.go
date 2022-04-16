@@ -21,35 +21,6 @@ func InfoHandler(c *gin.Context) {
 		return
 	}
 
-	//const layout = "2021-11-26T00:00:00+08:00"
-	//const layout = "2006-01-02T15:04:05+08:00"
-	//const layout = "2006-01-02T15:04:05Z07:00"
-	//loc, _ := time.LoadLocation("Local")
-	//start, _ := time.ParseInLocation(layout, req.Date1, loc)
-
-	//end, _ := time.ParseInLocation(layout, req.Date2, loc)
-	//startTs := start.Unix()
-	//endTs := end.Unix()
-
-	//var timestampList []int64
-	//var tempAll []models.AllData
-	//drivers.MysqlDb.Table("all_data").Find(&tempAll)
-	//for i := range tempAll {
-	//	t, _ := time.ParseInLocation(layout, tempAll[i].Date, loc)
-	//	timestampList = append(timestampList, t.Unix())
-	//}
-
-	//respPortIdSetTemp := map[string]bool{}
-	//respPolutionIdSetTemp := map[string]bool{}
-
-	//for idx, timestamp := range timestampList {
-	//	//fmt.Println(idx, timestamp, startTs, endTs)
-	//	if timestamp >= startTs && timestamp <= endTs {
-	//		respPortIdSetTemp[tempAll[idx].PortId] = true
-	//		respPolutionIdSetTemp[tempAll[idx].PolutionId] = true
-	//	}
-	//}
-
 	var alldatas []models.AllData
 	//time1, _ = time.ParseInLocation(layout, req.Date1, loc)
 	//fmt.Println("----------------------------------------------")
